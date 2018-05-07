@@ -1,0 +1,43 @@
+:host {
+    display: inline-flex;
+}
+
+.mfk-field {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 4px;
+}
+
+.mfk-field .form-control {
+    padding: 6px 5px !important;
+}
+
+.mfk-field-label {
+    font-size: 10px;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.mfk-field.status-field {
+    margin-right: 0;
+    width: 40px;
+}
+
+.glyphicon.status-valid {
+    color: #3c763d;
+    font-size: 20px;
+}
+
+.glyphicon.status-invalid {
+    color: #a94442;
+    font-size: 20px;
+}
+
+select:invalid {
+    color: gray;
+}
+
+.mfk-readonly-input {
+    width: 380px!important;
+}

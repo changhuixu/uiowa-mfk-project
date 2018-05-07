@@ -1,0 +1,16 @@
+<div id="mfk-container">
+    <div class="mfk-field" *ngFor="let option of options" [style.width.px]="option.width">
+        <p class="mfk-field-label">{{option.label}}</p>
+        <input type="text" class="form-control"
+            [attr.aria-label]="option.name"
+            [attr.name]="option.name" 
+            [attr.maxlength]="option.length"
+            [readOnly]="option.readonly"
+            [(ngModel)]="mfk[option.name]"
+            (paste)="paste($event)"
+            (keyup)="onKeyup($event)"
+            (keydown)="onKeydown($event)"
+            digitOnly
+        />
+    </div>
+</div>

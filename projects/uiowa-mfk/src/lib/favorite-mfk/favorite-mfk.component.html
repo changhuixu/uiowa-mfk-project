@@ -1,0 +1,18 @@
+<div style="vertical-align: bottom;padding-left: 15px;margin-right:-7px;">
+    <p class="favorite-label">Favorite MFK</p>
+    <div class="btn-group">
+        <button type="button" class="btn btn-light" [attr.aria-lable]="favoriteIconTitle" [attr.title]="favoriteIconTitle"
+            (click)="onFavoriteIconClick()">
+            <i class="fa fa-lg favorite" [ngClass]="favoriteIconClass"></i>
+        </button>
+        <div class="btn-group" ngbDropdown role="group" aria-label="favorite mfks">
+            <button class="btn btn-light" ngbDropdownToggle></button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item" style="cursor:pointer;" *ngFor="let item of favoriteMfks" (click)="onSelect(item)">{{item.alias}}</li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li class="dropdown-item" style="cursor:pointer;" (click)="onSelect()"><a><i class="fa fa-times" aria-hidden="true"></i> Clear MFK</a></li>
+            </div>
+        </div>
+    </div>
+</div>
+<uiowa-mfk-input [(mfk)]="mfk" [options]="options" style="padding-left:15px;" (mfkChange)="onInputMfkChange($event)"></uiowa-mfk-input>

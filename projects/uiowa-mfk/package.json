@@ -1,8 +1,19 @@
 {
   "name": "uiowa-mfk",
   "version": "0.0.1",
+  "author": "Changhui Xu <changhui-xu@uiowa.edu>",
+  "description":
+    "uiowa-mfk, uiowa-favorite-mfk, module, components, model classes, config, options",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "rxjs": "^6.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^2.0.0",
+    "bootstrap": "^4.1.1",
+    "font-awesome": "^4.7.0"
   }
 }
