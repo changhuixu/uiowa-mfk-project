@@ -1,16 +1,17 @@
-import { NgModule, ModuleWithProviders } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HttpClientModule } from "@angular/common/http";
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
-import { MfkInputComponent } from "./mfk-input/mfk-input.component";
-import { FavoriteMfkComponent } from "./favorite-mfk/favorite-mfk.component";
-import { UiowaMfkOptionsService } from "./services/uiowa-mfk-options.service";
-import { FavoriteMfkService } from "./services/favorite-mfk.service";
-import { MfkValidationService } from "./services/mfk-validation.service";
-import { DigitOnlyDirective } from "./shared/digit-only.directive";
-import { MfkStringComponent } from "./mfk-string/mfk-string.component";
+import { MfkInputComponent } from './mfk-input/mfk-input.component';
+import { FavoriteMfkComponent } from './favorite-mfk/favorite-mfk.component';
+import { UiowaMfkOptionsService } from './services/uiowa-mfk-options.service';
+import { FavoriteMfkService } from './services/favorite-mfk.service';
+import { MfkValidationService } from './services/mfk-validation.service';
+import { DigitOnlyDirective } from './shared/digit-only.directive';
+import { MfkStringComponent } from './mfk-string/mfk-string.component';
+import { UiowaMfkConfig, ConfigToken } from './models/uiowa-mfk-config';
 
 @NgModule({
   imports: [CommonModule, FormsModule, HttpClientModule, NgbModule],
@@ -24,11 +25,14 @@ import { MfkStringComponent } from "./mfk-string/mfk-string.component";
   providers: [UiowaMfkOptionsService, FavoriteMfkService, MfkValidationService]
 })
 export class UiowaMfkModule {
-  static forRoot(config: string): ModuleWithProviders {
+  static forRoot(config: UiowaMfkConfig): ModuleWithProviders {
     return {
       ngModule: UiowaMfkModule,
       providers: [
-        { provide: "config", useValue: config }        
+        {
+          provide: ConfigToken,
+          useValue: config
+        }
       ]
     };
   }

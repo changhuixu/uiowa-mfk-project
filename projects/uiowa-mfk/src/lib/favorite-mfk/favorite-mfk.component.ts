@@ -1,14 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
-import { Mfk } from "../models/mfk";
-import { FavoriteMfk } from "../models/favorite-mfk";
-import { MfkFieldOption } from "../models/mfk-field-option";
-import { FavoriteMfkService } from "../services/favorite-mfk.service";
-import { UiowaMfkOptionsService } from "../services/uiowa-mfk-options.service";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import { Mfk } from '../models/mfk';
+import { FavoriteMfk } from '../models/favorite-mfk';
+import { MfkFieldOption } from '../models/mfk-field-option';
+import { FavoriteMfkService } from '../services/favorite-mfk.service';
+import { UiowaMfkOptionsService } from '../services/uiowa-mfk-options.service';
 
 @Component({
-  selector: "uiowa-favorite-mfk",
-  templateUrl: "./favorite-mfk.component.html",
-  styleUrls: ["./favorite-mfk.component.css"]
+  selector: 'uiowa-favorite-mfk',
+  templateUrl: './favorite-mfk.component.html',
+  styleUrls: ['./favorite-mfk.component.css']
 })
 export class FavoriteMfkComponent implements OnInit, OnChanges {
   @Input() favoriteMfks: FavoriteMfk[];
@@ -19,18 +27,19 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
 
   favoriteIconTitle: string;
   favoriteIconClass: string;
-  constructor(private readonly favoriteMfksService: FavoriteMfkService, private readonly optionsService: UiowaMfkOptionsService) {}
+  constructor(
+    private readonly favoriteMfksService: FavoriteMfkService,
+    private readonly optionsService: UiowaMfkOptionsService
+  ) {}
 
   ngOnInit() {
-    if(!this.options || this.options.length < 1) {
-      Object.assign(this.options, this.optionsService.defaultOptions);
-    }
+    this.options = this.optionsService.getOptions(this.options);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.favoriteMfks) {
       this.favoriteMfks = changes.favoriteMfks.currentValue;
-      if (this.favoriteMfks)
+      if (this.favoriteMfks && this.favoriteMfks.length > 1)
         this.favoriteMfks = this.favoriteMfks.sort((a, b) => {
           return a.alias > b.alias ? 1 : b.alias > a.alias ? -1 : 0;
         });
@@ -39,7 +48,7 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
       this.mfk = changes.mfk.currentValue;
     }
     this.favoriteIconClass = this.getFavoriteIconClass();
-    if(changes.options) {
+    if (changes.options) {
       this.options = changes.options.currentValue;
       this.options = this.optionsService.getOptions(this.options);
     }
@@ -52,15 +61,15 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
 
   onFavoriteIconClick(): void {
     if (!this.mfk) {
-      throw new Error("Please enter or select an MFK.");
-    } 
+      throw new Error('Please enter or select an MFK.');
+    }
     const mfkFormatError = this.mfk.validateFormat();
     if (mfkFormatError) {
       throw new Error(mfkFormatError);
-    } 
+    }
     if (this.mfk.isIn(this.favoriteMfks)) {
       const id = this.favoriteMfks.find(x => x.matches(this.mfk)).id;
-      if (confirm("Are you sure to remove this MFK?")) {
+      if (confirm('Are you sure to remove this MFK?')) {
         this.favoriteMfksService.deleteMyFavoriteMfk(id).subscribe(x => {
           this.favoriteMfks = x;
           this.favoriteIconClass = this.getFavoriteIconClass();
@@ -70,12 +79,12 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
         return;
       }
     } else {
-      const alias = prompt("Please enter an alias for this MFK:", "");
+      const alias = prompt('Please enter an alias for this MFK:', '');
       if (!alias) {
         return;
       } else {
         if (alias.length > 50) {
-          throw new Error("The alias should be shorter than 50 characters.");
+          throw new Error('The alias should be shorter than 50 characters.');
         }
         this.favoriteMfksService
           .addFavoriteMfk(alias, this.mfk)
@@ -90,11 +99,10 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
 
   onSelect(selectedMfk: FavoriteMfk = null) {
     if (!selectedMfk) {
-      const defaultMfk = new Mfk();
+      this.mfk = new Mfk();
       for (let option of this.options.filter(o => o.defaultValue)) {
-        defaultMfk[option.name] = option.defaultValue;
+        this.mfk[option.name] = option.defaultValue;
       }
-      Object.assign(this.mfk, defaultMfk);
     } else {
       Object.assign(this.mfk, selectedMfk.mfk);
     }
@@ -103,10 +111,10 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
 
   private getFavoriteIconClass(): string {
     if (this.mfk && this.mfk.isIn(this.favoriteMfks)) {
-      this.favoriteIconTitle = "Remove this MFK";
-      return "fa-star active";
+      this.favoriteIconTitle = 'Remove this MFK';
+      return 'fa-star active';
     }
-    this.favoriteIconTitle = "Add to my favorite MFKs";
-    return "fa-star-o inactive";
+    this.favoriteIconTitle = 'Add to favorite MFKs';
+    return 'fa-star-o inactive';
   }
 }

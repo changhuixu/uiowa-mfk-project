@@ -6,15 +6,16 @@ import { map } from 'rxjs/operators';
 
 import { FavoriteMfk } from '../models/favorite-mfk';
 import { Mfk } from '../models/mfk';
+import { ConfigToken, UiowaMfkConfig } from '../models/uiowa-mfk-config';
 
 @Injectable()
 export class FavoriteMfkService {
-  public apiUrl: string;
+  private readonly apiUrl: string;
   constructor(
     private readonly httpClient: HttpClient,
-    @Inject('config') private readonly config: string
+    @Inject(ConfigToken) private readonly config: UiowaMfkConfig
   ) {
-    if (this.config.startsWith('http')) this.apiUrl = this.config;
+    this.apiUrl = this.config.favoriteMfksApiUrl;
   }
 
   getMyFavoriteMfks(): Observable<FavoriteMfk[]> {

@@ -4,7 +4,7 @@ import { MfkFieldName } from "../models/mfk-field-name";
 
 @Injectable()
 export class UiowaMfkOptionsService {
-  defaultOptions = [
+  readonly defaultOptions = [
     new MfkFieldOption(MfkFieldName.FUND),
     new MfkFieldOption(MfkFieldName.ORG),
     new MfkFieldOption(MfkFieldName.DEPT),
@@ -18,8 +18,7 @@ export class UiowaMfkOptionsService {
   ];
 
   getOptions(options: MfkFieldOption[] = []): MfkFieldOption[] {
-    let result: MfkFieldOption[] = [];
-    Object.assign(result, this.defaultOptions);
+    let result: MfkFieldOption[] = [...this.defaultOptions];
     if (options && options.length > 0) {
       for (const option of options) {
         var fieldOption = result.find(o => o.name === option.name);

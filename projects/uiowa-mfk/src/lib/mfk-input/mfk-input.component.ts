@@ -54,9 +54,7 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit() {
-    if (!this.options || this.options.length < 1) {
-      Object.assign(this.options, this.optionsService.defaultOptions);
-    }
+    this.options = this.optionsService.getOptions(this.options);
   }
 
   ngAfterViewInit(): void {}
@@ -82,8 +80,9 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
     if (
       (e.keyCode < 48 || e.keyCode > 57) &&
       (e.keyCode < 96 || e.keyCode > 105)
-    )
+    ) {
       return; // only numbers can trigger auto jump feature.
+    }
     const currentInputFieldName = e.target['name'];
     if (this.mfk[currentInputFieldName].length === e.target['maxLength']) {
       // auto jump to next input field when current field is full

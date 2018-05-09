@@ -1,6 +1,17 @@
 import { IMfk } from './mfk.interface';
 import { MfkFieldName } from './mfk-field-name';
 
+/**
+ * Options for MFK field.
+ *
+ * allows to set field default value, set readonly attribute, set validation regex pattern.  Example usage:
+ *
+ * ```typescript
+ * new MfkFieldOption(MfkFieldName.IACT, '6218')
+ * new MfkFieldOption(MfkFieldName.IACT, '6218', true)
+ * new MfkFieldOption(MfkFieldName.BRF)
+ * ```
+ */
 export class MfkFieldOption {
   public label: string;
   public width: number;
