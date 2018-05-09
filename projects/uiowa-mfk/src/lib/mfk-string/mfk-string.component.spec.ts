@@ -21,7 +21,7 @@ describe('MfkStringComponent', () => {
     fixture.detectChanges();
     expect(component).toBeDefined();
 
-    const el: HTMLElement = fixture.nativeElement;
+    const el: HTMLElement = fixture.debugElement.nativeElement;
     expect(el.textContent).toContain(
       '020-12-1012-01001-00000000-6219-000-00111-12-3555'
     );
@@ -32,7 +32,7 @@ describe('MfkStringComponent', () => {
     component.mfk = mfk;
     fixture.detectChanges();
     expect(component.mfk.IACT).toBe('6219');
-    const el: HTMLElement = fixture.nativeElement;
+    const el: HTMLElement = fixture.debugElement.nativeElement;
     expect(el.textContent).toContain(
       '020-12-1012-01001-00000000-6219-000-00111-12-3555'
     );
