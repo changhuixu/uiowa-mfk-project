@@ -1,14 +1,30 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from "@angular/core";
-import { Mfk } from "../models/mfk";
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  Input,
+  SimpleChanges
+} from '@angular/core';
+import { Mfk } from '../models/mfk';
+import { MfkFieldName } from '../models/mfk-field-name';
 
 @Component({
   selector: 'uiowa-mfk-string',
   template: `
-<span ng-if="mfk">
-{{mfk.FUND}}-{{mfk.ORG}}-{{mfk.DEPT}}-{{mfk.SUBDEPT}}-{{mfk.GRANTPGM}}-{{mfk.IACT}}-{{mfk.OACT}}-{{mfk.DACT}}-{{mfk.FN}}-{{mfk.CCTR}}<span *ngIf="mfk.BRF">-{{mfk.BRF}}</span>
+<span *ngIf="mfk">
+  <span>{{mfk.FUND}}</span>
+  <span>-{{mfk.ORG}}</span>
+  <span>-{{mfk.DEPT}}</span>
+  <span>-{{mfk.SUBDEPT}}</span>
+  <span>-{{mfk.GRANTPGM}}</span>
+  <span>-{{mfk.IACT}}</span>
+  <span>-{{mfk.OACT}}</span>
+  <span>-{{mfk.DACT}}</span>
+  <span>-{{mfk.FN}}</span>
+  <span>-{{mfk.CCTR}}</span>
+  <span *ngIf="mfk.BRF">-{{mfk.BRF}}</span>
 </span>
-  `,
-  styles: []
+  `
 })
 export class MfkStringComponent implements OnInit, OnChanges {
   @Input() mfk: Mfk;
@@ -20,10 +36,9 @@ export class MfkStringComponent implements OnInit, OnChanges {
    * ```
    */
   constructor() {}
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.mfk = changes.mfk.currentValue;
   }
-  ngOnInit() {}
-
 }

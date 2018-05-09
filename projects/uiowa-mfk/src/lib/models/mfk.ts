@@ -9,17 +9,17 @@ import { IMfk } from './mfk.interface';
  * there are also several common methods ready to use.
  */
 export class Mfk implements IMfk {
-  FUND: string = '';
-  ORG: string = '';
-  DEPT: string = '';
-  SUBDEPT: string = '';
-  GRANTPGM: string = '';
-  IACT: string = '';
-  OACT: string = '';
-  DACT: string = '';
-  FN: string = '';
-  CCTR: string = '';
-  BRF?: string = '';
+  FUND = '';
+  ORG = '';
+  DEPT = '';
+  SUBDEPT = '';
+  GRANTPGM = '';
+  IACT = '';
+  OACT = '';
+  DACT = '';
+  FN = '';
+  CCTR = '';
+  BRF = '';
 
   /**
    * Uiowa MFK. constructor takes a MFK string.
@@ -28,13 +28,15 @@ export class Mfk implements IMfk {
    *
    * Example usages:
    * ```typescript
-   * var m1 = new Mfk();
-   * var m2 = new Mfk("010-11-1010-00000-00000000-6218-00000-0000-00-1111");
-   * var m3 = new Mfk("02012101201001000000006219000001111235555");
+   * let m1 = new Mfk();
+   * const m2 = new Mfk('010-11-1010-00000-00000000-6218-000-00000-00-1111');
+   * const m3 = new Mfk('0201210120100100000000621900000111123555');
    * ```
    */
   constructor(mfkString: string = null) {
-    if (mfkString) this.parseString(mfkString);
+    if (mfkString) {
+      this.parseString(mfkString);
+    }
   }
 
   /**
@@ -42,7 +44,7 @@ export class Mfk implements IMfk {
    *
    * --> plain JSON object doesn't have type at run time.
    */
-  static cast(obj: IMfk): Mfk {
+  static cast(obj: any): Mfk {
     const mfk = new Mfk();
     Object.keys(obj).forEach(key => (mfk[key.toUpperCase()] = obj[key]));
     return mfk;
@@ -50,7 +52,7 @@ export class Mfk implements IMfk {
 
   /**
    * Compare values of all 10 fields
-   * 
+   *
    * @param mfk An MFK
    */
   equals(mfk: Mfk): boolean {
@@ -84,11 +86,13 @@ export class Mfk implements IMfk {
    * Get MFK format validation message. It checkes this MFK's first 10 fields are numeric strings or not.
    */
   validateFormat(): string {
-    const mfkString = this.to40String('');
-    if (mfkString.length !== 40)
-      return `MFK [${mfkString}] is not 40 digits long.`;
-    if (isNaN(Number(mfkString)))
+    const mfkString = this.to40String();
+    if (mfkString.length !== 40) {
+      return `MFK is not 40 digits long.`;
+    }
+    if (isNaN(Number(mfkString))) {
       return `MFK [${mfkString}] should be all numbers.`;
+    }
     return null;
   }
 
@@ -99,7 +103,9 @@ export class Mfk implements IMfk {
    * @returns boolean
    */
   isIn(favoriteMfks: FavoriteMfk[]): boolean {
-    if (!favoriteMfks || favoriteMfks.length < 1) return false;
+    if (!favoriteMfks || favoriteMfks.length < 1) {
+      return false;
+    }
     return favoriteMfks.some(x => x.matches(this));
   }
 
@@ -107,8 +113,10 @@ export class Mfk implements IMfk {
    * MFK module internal method.
    */
   parseString(input: string) {
-    let s = input.replace(/\D/g, '');
-    if (!s || s.length < 40) return;
+    const s = input.replace(/\D/g, '');
+    if (!s || s.length < 40) {
+      return;
+    }
     this.FUND = s.substring(0, 3);
     this.ORG = s.substring(3, 5);
     this.DEPT = s.substring(5, 9);
@@ -119,6 +127,8 @@ export class Mfk implements IMfk {
     this.DACT = s.substring(29, 34);
     this.FN = s.substring(34, 36);
     this.CCTR = s.substring(36, 40);
-    if (s.length >= 42) this.BRF = s.substring(40, 42);
+    if (s.length >= 42) {
+      this.BRF = s.substring(40, 42);
+    }
   }
 }

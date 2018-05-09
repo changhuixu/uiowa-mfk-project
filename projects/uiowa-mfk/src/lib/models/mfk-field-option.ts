@@ -16,7 +16,7 @@ export class MfkFieldOption {
   public label: string;
   public width: number;
   public length: number;
-  private numericRegex = '^[0-9]+$';
+  private readonly numericRegex = '^[0-9]+$';
   /**
    * Options for MFK field.
    *
@@ -34,35 +34,47 @@ export class MfkFieldOption {
    * @param valuePattern (Optional) set a regex for this field. Default: '^[0-9]+$'.
    */
   constructor(
-    public name: keyof IMfk,
-    public defaultValue: string = '',
-    public readonly: boolean = false,
-    public valuePattern: string = '^[0-9]+$'
+    public readonly name: keyof IMfk,
+    public readonly defaultValue: string = '',
+    public readonly readonly: boolean = false,
+    public readonly valuePattern: string = '^[0-9]+$'
   ) {
     this.getFieldLabelAndLength();
 
     this.width = this.length * 9 + 12;
-    if (!valuePattern) valuePattern = this.numericRegex;
+    if (!valuePattern) {
+      valuePattern = this.numericRegex;
+    }
     if (defaultValue) {
-      if (defaultValue.length !== this.length)
+      if (defaultValue.length !== this.length) {
         throw new Error(
-          `The default value [${defaultValue}] for ${this.name} is not ${
+          `The default value [${defaultValue}] for ${name} is not ${
             this.length
           } digits long.`
         );
+      }
+
       let reg = new RegExp(this.numericRegex);
-      if (!reg.test(defaultValue))
+      if (!reg.test(defaultValue)) {
         throw new Error(
-          `The default value [${defaultValue}] for ${this.name} is not a number`
+          `The default value [${defaultValue}] for ${name} is not a number.`
         );
+      }
+
       if (valuePattern !== this.numericRegex) {
-        let reg = new RegExp(valuePattern);
-        if (!reg.test(defaultValue))
+        reg = new RegExp(valuePattern);
+        if (!reg.test(defaultValue)) {
           throw new Error(
-            `The default value [${defaultValue}] for ${
-              this.name
-            } doesn't match RegEx "${valuePattern}"`
+            `The default value [${defaultValue}] for ${name} doesn't match RegEx "${valuePattern}".`
           );
+        }
+      }
+    }
+    if (this.readonly) {
+      if (!this.defaultValue) {
+        throw new Error(
+          `Default value for readonly field [${name}] is required.`
+        );
       }
     }
   }
@@ -114,8 +126,7 @@ export class MfkFieldOption {
         this.length = 2;
         break;
       default:
-        this.label = '';
-        this.length = 0;
+        throw new Error(`MFK field name [${this.name}] is invalid.`);
     }
   }
 }

@@ -1,12 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { ConfigToken, UiowaMfkConfig } from '../models/uiowa-mfk-config';
 import { FavoriteMfk } from '../models/favorite-mfk';
 import { Mfk } from '../models/mfk';
-import { ConfigToken, UiowaMfkConfig } from '../models/uiowa-mfk-config';
 
 @Injectable()
 export class FavoriteMfkService {
@@ -15,7 +14,9 @@ export class FavoriteMfkService {
     private readonly httpClient: HttpClient,
     @Inject(ConfigToken) private readonly config: UiowaMfkConfig
   ) {
-    this.apiUrl = this.config.favoriteMfksApiUrl;
+    this.apiUrl = this.trimLeadingAndTrailingSlash(
+      this.config.favoriteMfksApiUrl
+    );
   }
 
   getMyFavoriteMfks(): Observable<FavoriteMfk[]> {
@@ -38,8 +39,12 @@ export class FavoriteMfkService {
   }
 
   private trimLeadingAndTrailingSlash(s: string): string {
-    if (s.charAt(0) == '/') s = s.substr(1);
-    if (s.charAt(s.length - 1) == '/') s = s.substr(0, s.length - 1);
+    if (s.charAt(0) === '/') {
+      s = s.substr(1);
+    }
+    if (s.charAt(s.length - 1) === '/') {
+      s = s.substr(0, s.length - 1);
+    }
     return s;
   }
 }

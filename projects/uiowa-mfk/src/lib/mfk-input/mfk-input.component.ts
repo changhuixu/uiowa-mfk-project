@@ -25,16 +25,18 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
   private _mfk: Mfk;
   @Input()
   set mfk(mfk: Mfk) {
-    for (let option of this.options.filter(o => o.defaultValue)) {
-      if (this.isNullOrWhiteSpace(mfk[option.name]))
-        mfk[option.name] = option.defaultValue;
-    }
+    this.options.filter(o => o.defaultValue).forEach(o => {
+      if (this.isNullOrWhiteSpace(mfk[o.name])) {
+        mfk[o.name] = o.defaultValue;
+      }
+    });
+
     this._mfk = mfk;
   }
   get mfk(): Mfk {
-    for (let option of this.options.filter(o => o.readonly)) {
-      this._mfk[option.name] = option.defaultValue;
-    }
+    this.options.filter(o => o.readonly).forEach(o => {
+      this._mfk[o.name] = o.defaultValue;
+    });
     return this._mfk;
   }
   @Input() options?: MfkFieldOption[] = [];
@@ -46,7 +48,9 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private readonly optionsService: UiowaMfkOptionsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mfk) this.mfk = changes.mfk.currentValue;
+    if (changes.mfk) {
+      this.mfk = changes.mfk.currentValue;
+    }
     if (changes.options) {
       this.options = changes.options.currentValue;
       this.options = this.optionsService.getOptions(this.options);
@@ -90,8 +94,10 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
         o => o.name === currentInputFieldName
       );
       for (let i = currentInputFieldIndex + 1; i < this.options.length; i++) {
-        if (this.options[i].readonly) continue;
-        let nextInputField = this.mfkInputFields.find(
+        if (this.options[i].readonly) {
+          continue;
+        }
+        const nextInputField = this.mfkInputFields.find(
           v => v.el.nativeElement['name'] === this.options[i].name
         );
         nextInputField.el.nativeElement.focus();
@@ -102,8 +108,12 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
 
   onKeydown(e: KeyboardEvent) {
     // handle "tab" key --> auto fill '0's if the input field has not completed
-    if (e.keyCode !== 9) return;
-    if (e.target['readOnly']) return;
+    if (e.keyCode !== 9) {
+      return;
+    }
+    if (e.target['readOnly']) {
+      return;
+    }
     const maxlength = e.target['maxLength'];
     while (this.mfk[e.target['name']].length < maxlength) {
       this.mfk[e.target['name']] = this.mfk[e.target['name']].concat('0');

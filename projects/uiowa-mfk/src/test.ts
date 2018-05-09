@@ -8,6 +8,7 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import { defer } from 'rxjs';
 
 declare const require: any;
 
@@ -20,3 +21,9 @@ getTestBed().initTestEnvironment(
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
+
+/** Create async observable that emits-once and completes
+ *  after a JS engine turn */
+export function asyncData<T>(data: T) {
+  return defer(() => Promise.resolve(data));
+}

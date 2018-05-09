@@ -8,13 +8,13 @@ export class DigitOnlyDirective {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    let e = <KeyboardEvent>event;
+    const e = <KeyboardEvent>event;
     if (
       [46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
-      (e.keyCode == 65 && e.ctrlKey === true) || // Allow: Ctrl+A
-      (e.keyCode == 67 && e.ctrlKey === true) || // Allow: Ctrl+C
-      (e.keyCode == 86 && e.ctrlKey === true) || // Allow: Ctrl+V
-      (e.keyCode == 88 && e.ctrlKey === true) || // Allow: Ctrl+X
+      (e.keyCode === 65 && e.ctrlKey === true) || // Allow: Ctrl+A
+      (e.keyCode === 67 && e.ctrlKey === true) || // Allow: Ctrl+C
+      (e.keyCode === 86 && e.ctrlKey === true) || // Allow: Ctrl+V
+      (e.keyCode === 88 && e.ctrlKey === true) || // Allow: Ctrl+X
       (e.keyCode >= 35 && e.keyCode <= 39) // Allow: home, end, left, right
     ) {
       // let it happen, don't do anything

@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class MfkValidationService {
-  private readonly url = `https://apps.its.uiowa.edu/mfk/api-singleDesc.jsp?mfk=10%20%20%20`;
   constructor(private readonly httpClient: HttpClient) {}
 
   /**
@@ -23,21 +22,24 @@ export class MfkValidationService {
    * @param options   (Optional) an array of MfkFieldOption(s)
    */
   validateFormat(mfk: Mfk, options: MfkFieldOption[] = []): string {
-    var formatError = mfk.validateFormat();
-    if (formatError) return formatError;
+    const formatError = mfk.validateFormat();
+    if (formatError) {
+      return formatError;
+    }
     if (options && options.length > 0) {
       for (const option of options) {
         if (option.readonly && mfk[option.name] !== option.defaultValue) {
           return `The readonly field [${option.name}] has a value of ${
             mfk[option.name]
-          } instead of ${option.defaultValue}`;
+          } instead of ${option.defaultValue}.`;
         }
         if (option.valuePattern) {
-          let reg = new RegExp(option.valuePattern);
-          if (!reg.test(mfk[option.name]))
+          const reg = new RegExp(option.valuePattern);
+          if (!reg.test(mfk[option.name])) {
             return `The field [${option.name}] has a value of ${
               mfk[option.name]
-            } doesn't match "${option.valuePattern}"`;
+            } doesn't match "${option.valuePattern}".`;
+          }
         }
       }
     }
@@ -52,12 +54,16 @@ export class MfkValidationService {
    */
   getValidationResult(mfk: Mfk): Observable<MfkValidationResult> {
     return this.httpClient
-      .get(`${this.url}${mfk.to40String()}`, { responseType: 'text' })
+      .get(this.getMfkValidationUrl(mfk), { responseType: 'text' })
       .pipe(
         map(response => {
-          let parts = response.split(/\n/);
-          return new MfkValidationResult(+parts[0], parts[1]);
+          const parts = response.split(/\n/);
+          return new MfkValidationResult(+parts[0], parts[1].trim());
         })
       );
+  }
+
+  private getMfkValidationUrl(mfk: Mfk): string {
+    return `https://apps.its.uiowa.edu/mfk/api-singleDesc.jsp?mfk=10%20%20%20${mfk.to40String()}`;
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Mfk } from 'uiowa-mfk';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  mfk = new Mfk('02012101201001000000006219000001111235555');
 }

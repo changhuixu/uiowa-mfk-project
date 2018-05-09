@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { UiowaMfkModule } from 'uiowa-mfk';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, UiowaMfkModule],
+  imports: [BrowserModule, FormsModule, UiowaMfkModule],
   providers: [],
   bootstrap: [AppComponent]
 })

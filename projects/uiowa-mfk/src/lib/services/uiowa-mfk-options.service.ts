@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { MfkFieldOption } from "../models/mfk-field-option";
-import { MfkFieldName } from "../models/mfk-field-name";
+import { Injectable } from '@angular/core';
+import { MfkFieldOption } from '../models/mfk-field-option';
+import { MfkFieldName } from '../models/mfk-field-name';
 
 @Injectable()
 export class UiowaMfkOptionsService {
@@ -18,12 +18,12 @@ export class UiowaMfkOptionsService {
   ];
 
   getOptions(options: MfkFieldOption[] = []): MfkFieldOption[] {
-    let result: MfkFieldOption[] = [...this.defaultOptions];
+    const result: MfkFieldOption[] = [...this.defaultOptions];
     if (options && options.length > 0) {
       for (const option of options) {
-        var fieldOption = result.find(o => o.name === option.name);
+        const fieldOption = result.find(o => o.name === option.name);
         if (fieldOption) {
-          let index = result.indexOf(fieldOption);
+          const index = result.indexOf(fieldOption);
           result[index] = option;
         } else {
           result.push(option);
