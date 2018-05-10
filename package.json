@@ -8,6 +8,7 @@
     "build:prod": "ng build --prod",
     "build:lib": "ng build uiowa-mfk --prod",
     "test:lib": "ng test uiowa-mfk --source-map=false",
+    "test:lib:debug": "ng test uiowa-mfk --source-map=false --watch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

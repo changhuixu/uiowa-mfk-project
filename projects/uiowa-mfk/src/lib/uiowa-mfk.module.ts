@@ -25,7 +25,11 @@ import { UiowaMfkConfig, ConfigToken } from './models/uiowa-mfk-config';
   providers: [UiowaMfkOptionsService, FavoriteMfkService, MfkValidationService]
 })
 export class UiowaMfkModule {
-  static forRoot(config: UiowaMfkConfig): ModuleWithProviders {
+  static forRoot(
+    config: UiowaMfkConfig = {
+      favoriteMfksApiUrl: 'api/myFavoriteMfks'
+    }
+  ): ModuleWithProviders {
     return {
       ngModule: UiowaMfkModule,
       providers: [

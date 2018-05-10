@@ -39,10 +39,11 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.favoriteMfks) {
       this.favoriteMfks = changes.favoriteMfks.currentValue;
-      if (this.favoriteMfks && this.favoriteMfks.length > 1)
+      if (this.favoriteMfks && this.favoriteMfks.length > 1) {
         this.favoriteMfks = this.favoriteMfks.sort((a, b) => {
           return a.alias > b.alias ? 1 : b.alias > a.alias ? -1 : 0;
         });
+      }
     }
     if (changes.mfk) {
       this.mfk = changes.mfk.currentValue;
@@ -100,9 +101,9 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
   onSelect(selectedMfk: FavoriteMfk = null) {
     if (!selectedMfk) {
       this.mfk = new Mfk();
-      for (let option of this.options.filter(o => o.defaultValue)) {
-        this.mfk[option.name] = option.defaultValue;
-      }
+      this.options
+        .filter(o => o.defaultValue)
+        .forEach(o => (this.mfk[o.name] = o.defaultValue));
     } else {
       Object.assign(this.mfk, selectedMfk.mfk);
     }

@@ -22,11 +22,11 @@ import { ElementRef } from '@angular/core/src/linker/element_ref';
   styleUrls: ['./mfk-input.component.css']
 })
 export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
-  private _mfk: Mfk;
+  private _mfk = new Mfk();
   @Input()
   set mfk(mfk: Mfk) {
     this.options.filter(o => o.defaultValue).forEach(o => {
-      if (this.isNullOrWhiteSpace(mfk[o.name])) {
+      if (!(mfk[o.name])) {
         mfk[o.name] = o.defaultValue;
       }
     });
@@ -118,9 +118,5 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
     while (this.mfk[e.target['name']].length < maxlength) {
       this.mfk[e.target['name']] = this.mfk[e.target['name']].concat('0');
     }
-  }
-
-  private isNullOrWhiteSpace(str: string): boolean {
-    return str === null || str.match(/^ *$/) !== null;
   }
 }
