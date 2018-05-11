@@ -2,7 +2,7 @@ import { FavoriteMfk } from './favorite-mfk';
 import { Mfk } from './mfk';
 
 describe('FavoriteMfk', () => {
-  it('should case an object to FavoriteMfk class', () => {
+  it('should cast an object to FavoriteMfk class', () => {
     const obj = {
       id: 12,
       alias: 'test MFK',
