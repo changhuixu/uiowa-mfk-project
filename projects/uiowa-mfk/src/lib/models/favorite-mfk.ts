@@ -20,7 +20,7 @@ export class FavoriteMfk {
    */
   static cast(obj: any): FavoriteMfk {
     const mfk = new FavoriteMfk();
-    mfk.id += obj.id;
+    mfk.id = +obj.id;
     mfk.alias = obj.alias;
     mfk.mfk = Mfk.cast(obj.mfk);
     return mfk;

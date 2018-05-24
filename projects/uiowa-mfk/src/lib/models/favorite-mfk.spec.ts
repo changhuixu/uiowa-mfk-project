@@ -25,6 +25,25 @@ describe('FavoriteMfk', () => {
     expect(result.mfk).toEqual(Mfk.cast(obj.mfk));
     expect(result instanceof FavoriteMfk).toBeTruthy();
     expect(result.mfk instanceof Mfk).toBeTruthy();
+
+    const obj2 = {
+      id: '12',
+      alias: 'test MFK',
+      mfk: {
+        cctr: '1111',
+        dact: '00000',
+        dept: '1010',
+        fn: '00',
+        fund: '010',
+        grantpgm: '00000000',
+        iact: '6128',
+        oact: '000',
+        org: '11',
+        subdept: '00000'
+      }
+    };
+    const result2 = FavoriteMfk.cast(obj);
+    expect(result2.id).toBe(12);
   });
 
   it('should determine if an MFK matches a FavoriteMfk', () => {
