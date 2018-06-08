@@ -1,5 +1,4 @@
 import { FavoriteMfk } from './favorite-mfk';
-import { MfkFieldOption } from './mfk-field-option';
 import { IMfk } from './mfk.interface';
 
 /**

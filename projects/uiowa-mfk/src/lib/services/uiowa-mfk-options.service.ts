@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { MfkFieldOption } from '../models/mfk-field-option';
 import { MfkFieldName } from '../models/mfk-field-name';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UiowaMfkOptionsService {
   readonly defaultOptions = [
     new MfkFieldOption(MfkFieldName.FUND),

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { UiowaMfkModule } from 'uiowa-mfk';
+import { UiowaMfkModule } from '@uiowa/uiowa-mfk';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Mfk } from '../models/mfk';
 import { MfkFieldOption } from '../models/mfk-field-option';
-import { UiowaMfkOptionsService } from './uiowa-mfk-options.service';
 import { MfkValidationResult } from '../models/mfk-validation-result';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MfkValidationService {
   constructor(private readonly httpClient: HttpClient) {}
 

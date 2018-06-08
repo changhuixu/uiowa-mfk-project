@@ -6,7 +6,6 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { Mfk } from '../models/mfk';
-import { MfkFieldName } from '../models/mfk-field-name';
 
 @Component({
   selector: 'uiowa-mfk-string',

@@ -7,7 +7,9 @@ import { ConfigToken, UiowaMfkConfig } from '../models/uiowa-mfk-config';
 import { FavoriteMfk } from '../models/favorite-mfk';
 import { Mfk } from '../models/mfk';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FavoriteMfkService {
   private readonly apiUrl: string;
   constructor(
