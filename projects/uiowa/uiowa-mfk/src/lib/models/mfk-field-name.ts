@@ -1,15 +1,13 @@
-import { IMfk } from './mfk.interface';
-
-export const MfkFieldName: { [k in keyof IMfk]: k } = {
-  FUND: 'FUND',
-  ORG: 'ORG',
-  DEPT: 'DEPT',
-  SUBDEPT: 'SUBDEPT',
-  GRANTPGM: 'GRANTPGM',
-  IACT: 'IACT',
-  OACT: 'OACT',
-  DACT: 'DACT',
-  FN: 'FN',
-  CCTR: 'CCTR',
-  BRF: 'BRF'
-};
+export class MfkFieldName {
+  static FUND = 'FUND';
+  static ORG = 'ORG';
+  static DEPT = 'DEPT';
+  static SUBDEPT = 'SUBDEPT';
+  static GRANTPGM = 'GRANTPGM';
+  static IACT = 'IACT';
+  static OACT = 'OACT';
+  static DACT = 'DACT';
+  static FN = 'FN';
+  static CCTR = 'CCTR';
+  static BRF = 'BRF';
+}

@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@uiowa/uiowa-mfk.svg?style=flat-square)](https://www.npmjs.com/package/@uiowa/uiowa-mfk)
 
-`uiowa-mfk` is a full-fledged Angular library for MFK input and Favorite MFK management. This library has peer dependency on Angular 6, ng-bootstrap 2, Bootstrap 4 (css) and Font-Awesome 4.7, as of May, 2018. The version number of this library is following the major and minor version of Angular.
+`uiowa-mfk` is a full-fledged Angular library for MFK input and Favorite MFK management. This library has peer dependency on Angular >=6, ng-bootstrap >=2, Bootstrap 4 (css) and @uiowa/digit-only, as of August, 2018. The version number of this library is following the major and minor version of Angular.
 
 ## Features
 

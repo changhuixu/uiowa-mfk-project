@@ -50,4 +50,13 @@ describe('MfkFieldOption', () => {
     expect(option.defaultValue).toBe('6218');
     expect(option.readonly).toBeTruthy();
   });
+
+  it('should allow any non-empty readonly MFK field', () => {
+    const option = new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true);
+    expect(option.length).toBe(4);
+    expect(option.width).toBe(48);
+    expect(option.label).toBe('Iact');
+    expect(option.defaultValue).toBe('xxxx');
+    expect(option.readonly).toBeTruthy();
+  });
 });
