@@ -12,8 +12,8 @@ import {
 import { Mfk } from '../models/mfk';
 import { MfkFieldOption } from '../models/mfk-field-option';
 import { UiowaMfkOptionsService } from '../services/uiowa-mfk-options.service';
-import { DigitOnlyDirective } from '../shared/digit-only.directive';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { DigitOnlyDirective } from '@uiowa/digit-only';
 
 @Component({
   selector: 'uiowa-mfk-input',

@@ -1,27 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
-import { UiowaHeaderModule } from '@uiowa/uiowa-header';
+import { UiowaMfkModule } from 'projects/uiowa/uiowa-mfk/src/public_api';
 
-import { UiowaMfkModule } from '@uiowa/uiowa-mfk';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app.routing';
 
 @NgModule({
-  declarations: [AppComponent],
+declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
     NgbModule.forRoot(),
-    AppRoutingModule,
-    UiowaHeaderModule,
-    UiowaMfkModule
+    DigitOnlyModule,
+    UiowaMfkModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

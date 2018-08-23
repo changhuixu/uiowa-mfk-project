@@ -1,9 +1,9 @@
 <div id="mfk-container">
-    <div class="mfk-field" *ngFor="let option of options" [style.width.px]="option.width">
+    <div class="mfk-field" *ngFor="let option of options" [style.width.rem]="option.width">
         <p class="mfk-field-label">{{option.label}}</p>
         <input type="text" class="form-control"
             [attr.aria-label]="option.name"
-            [attr.name]="option.name" 
+            [attr.name]="option.name"
             [attr.maxlength]="option.length"
             [readOnly]="option.readonly"
             [(ngModel)]="mfk[option.name]"

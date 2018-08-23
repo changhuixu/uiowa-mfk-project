@@ -19,14 +19,19 @@ import { UiowaMfkOptionsService } from '../services/uiowa-mfk-options.service';
   styleUrls: ['./favorite-mfk.component.css']
 })
 export class FavoriteMfkComponent implements OnInit, OnChanges {
-  @Input() favoriteMfks: FavoriteMfk[];
-  @Input() mfk: Mfk;
-  @Input() options?: MfkFieldOption[] = [];
-  @Output() mfkChanges = new EventEmitter<Mfk>();
-  @Output() favoriteMfksUpdated = new EventEmitter<FavoriteMfk[]>();
+  @Input()
+  favoriteMfks: FavoriteMfk[];
+  @Input()
+  mfk: Mfk;
+  @Input()
+  options?: MfkFieldOption[] = [];
+  @Output()
+  mfkChanges = new EventEmitter<Mfk>();
+  @Output()
+  favoriteMfksUpdated = new EventEmitter<FavoriteMfk[]>();
 
   favoriteIconTitle: string;
-  favoriteIconClass: string;
+  isIconActive = false;
   constructor(
     private readonly favoriteMfksService: FavoriteMfkService,
     private readonly optionsService: UiowaMfkOptionsService
@@ -48,7 +53,7 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
     if (changes.mfk) {
       this.mfk = changes.mfk.currentValue;
     }
-    this.favoriteIconClass = this.getFavoriteIconClass();
+    this.isIconActive = this.isInFavorites();
     if (changes.options) {
       this.options = changes.options.currentValue;
       this.options = this.optionsService.getOptions(this.options);
@@ -57,7 +62,7 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
 
   onInputMfkChange(inputMfk: Mfk) {
     this.mfk = inputMfk;
-    this.favoriteIconClass = this.getFavoriteIconClass();
+    this.isIconActive = this.isInFavorites();
   }
 
   onFavoriteIconClick(): void {
@@ -73,7 +78,7 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
       if (confirm('Are you sure to remove this MFK?')) {
         this.favoriteMfksService.deleteMyFavoriteMfk(id).subscribe(x => {
           this.favoriteMfks = x;
-          this.favoriteIconClass = this.getFavoriteIconClass();
+          this.isIconActive = this.isInFavorites();
           this.favoriteMfksUpdated.emit(this.favoriteMfks);
         });
       } else {
@@ -91,7 +96,7 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
           .addFavoriteMfk(alias, this.mfk)
           .subscribe(x => {
             this.favoriteMfks = x;
-            this.favoriteIconClass = this.getFavoriteIconClass();
+            this.isIconActive = this.isInFavorites();
             this.favoriteMfksUpdated.emit(this.favoriteMfks);
           });
       }
@@ -107,15 +112,10 @@ export class FavoriteMfkComponent implements OnInit, OnChanges {
     } else {
       Object.assign(this.mfk, selectedMfk.mfk);
     }
-    this.favoriteIconClass = this.getFavoriteIconClass();
+    this.isIconActive = this.isInFavorites();
   }
 
-  private getFavoriteIconClass(): string {
-    if (this.mfk && this.mfk.isIn(this.favoriteMfks)) {
-      this.favoriteIconTitle = 'Remove this MFK';
-      return 'fa-star active';
-    }
-    this.favoriteIconTitle = 'Add to favorite MFKs';
-    return 'fa-star-o inactive';
+  private isInFavorites(): boolean {
+    return this.mfk && this.mfk.isIn(this.favoriteMfks);
   }
 }

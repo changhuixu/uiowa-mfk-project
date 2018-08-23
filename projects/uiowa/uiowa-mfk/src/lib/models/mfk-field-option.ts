@@ -1,4 +1,3 @@
-import { IMfk } from './mfk.interface';
 import { MfkFieldName } from './mfk-field-name';
 
 /**
@@ -34,16 +33,24 @@ export class MfkFieldOption {
    * @param valuePattern (Optional) set a regex for this field. Default: '^[0-9]+$'.
    */
   constructor(
-    public readonly name: keyof IMfk,
+    public readonly name: string,
     public readonly defaultValue: string = '',
     public readonly readonly: boolean = false,
     public readonly valuePattern: string = '^[0-9]+$'
   ) {
     this.getFieldLabelAndLength();
 
-    this.width = this.length * 9 + 12;
+    this.width = this.length * 0.65 + 0.75;
     if (!valuePattern) {
       valuePattern = this.numericRegex;
+    }
+    if (this.readonly) {
+      if (!this.defaultValue) {
+        throw new Error(
+          `Default value for readonly field [${name}] is required.`
+        );
+      }
+      return; // if readonly, then don't validate default value
     }
     if (defaultValue) {
       if (defaultValue.length !== this.length) {
@@ -68,13 +75,6 @@ export class MfkFieldOption {
             `The default value [${defaultValue}] for ${name} doesn't match RegEx "${valuePattern}".`
           );
         }
-      }
-    }
-    if (this.readonly) {
-      if (!this.defaultValue) {
-        throw new Error(
-          `Default value for readonly field [${name}] is required.`
-        );
       }
     }
   }
