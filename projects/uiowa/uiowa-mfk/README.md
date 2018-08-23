@@ -1,34 +1,37 @@
 # UIowa Mfk
 
+[![Build Status](https://img.shields.io/travis/changhuixu/uiowa-mfk-project/master.svg?label=Travis%20CI&style=flat-square)](https://travis-ci.org/changhuixu/uiowa-mfk-project)
 [![npm](https://img.shields.io/npm/v/@uiowa/uiowa-mfk.svg?style=flat-square)](https://www.npmjs.com/package/@uiowa/uiowa-mfk)
 
 `uiowa-mfk` is a full-fledged Angular library for MFK input and Favorite MFK management. This library has peer dependency on Angular >=6, ng-bootstrap >=2, Bootstrap 4 (css) and @uiowa/digit-only, as of August, 2018. The version number of this library is following the major and minor version of Angular.
+
+## [Demo](https://uiowa-mfk.firebaseapp.com)
 
 ## Features
 
 - `uiowa-mfk-input`
 
-  1.  Number only input fields with fixed lengths.
-  2.  Smartly handle paste strings for input fields.
-  3.  Auto fill 0s in the MFK input field when hit <kbd>Tab</kbd> key.
-  4.  Auto focus next fields when current MFK input field is full.
-  5.  Allow set field(s) default value(s).
-  6.  Allow set readonly field(s).
-  7.  Provide MFK common methods.
-  8.  Provide MFK validation method and service.
-  9.  Provide MFK change event API.
+  1. Number only input fields with fixed lengths.
+  1. Smartly handle paste strings for input fields.
+  1. Auto fill 0s in the MFK input field when hit <kbd>Tab</kbd> key.
+  1. Auto focus next fields when current MFK input field is full.
+  1. Allow set field(s) default value(s).
+  1. Allow set readonly field(s).
+  1. Provide MFK common methods.F
+  1. Provide MFK validation method and service.
+  1. Provide MFK change event API.
 
 - `uiowa-favorite-mfk`
 
-  1.  Select Favorite MFK and show it in MFK input.
-  2.  Clear MFK input.
-  3.  Real-time indication for determine if an MFK is "favorite" or not.
-  4.  Add/Remove Favorite MFK.
-  5.  Provide Favorite MFK common methods.
-  6.  Provide Favorite MFK crud service.
-  7.  Provide Favorite MFKs change event API.
+  1. Select Favorite MFK and show it in MFK input.
+  1. Clear MFK input.
+  1. Real-time indication for determine if an MFK is "favorite" or not.
+  1. Add/Remove Favorite MFK.
+  1. Provide Favorite MFK common methods.
+  1. Provide Favorite MFK crud service.
+  1. Provide Favorite MFKs change event API.
 
 - `uiowa-mfk-string`
 
-  1.  Show MFK string in a `<span>` tag.
-  2.  Auto detect BRF field in the string.
+  1. Show MFK string in a `<span>` tag.
+  1. Auto detect BRF field in the string.
