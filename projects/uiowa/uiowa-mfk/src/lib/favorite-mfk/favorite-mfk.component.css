@@ -1,0 +1,28 @@
+:host {
+  display: inline-flex;
+}
+button {
+  padding: 0.3rem 0.5rem 0.45rem 0.5rem;
+  border: 1px solid #dddddd;
+}
+.favorite-label {
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.active {
+  color: #f0ad4e;
+  width: 1.5rem;
+  vertical-align: bottom;
+}
+
+.inactive {
+  color: #867e71;
+  width: 1.5rem;
+  vertical-align: bottom;
+}
+button:hover .inactive {
+  color: #f0ad4e;
+}

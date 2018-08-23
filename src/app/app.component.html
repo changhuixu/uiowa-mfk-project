@@ -1,11 +1,9 @@
-<header>
-    <uiowa-header [applicationName]="'@uiowa/uiowa-mfk'"></uiowa-header>
-</header>
-<main>
-    <div>
-        <uiowa-mfk-input [(mfk)]="mfk"></uiowa-mfk-input>
-    </div>
+<div>
+  <uiowa-mfk-input [(mfk)]="mfk"></uiowa-mfk-input>
+</div>
 
-    <uiowa-mfk-string [mfk]="mfk"></uiowa-mfk-string>
+<uiowa-mfk-string [mfk]="mfk"></uiowa-mfk-string>
 
-</main>
+<div>
+  <uiowa-favorite-mfk [favoriteMfks]="favoriteMfks" [(mfk)]="mfk2"></uiowa-favorite-mfk>
+</div>

@@ -1,0 +1,20 @@
+:host {
+  display: inline-flex;
+}
+
+.mfk-field {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 4px;
+}
+
+.mfk-field .form-control {
+  padding: 6px 5px !important;
+}
+
+.mfk-field-label {
+  font-size: 10px;
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+}

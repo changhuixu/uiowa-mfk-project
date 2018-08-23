@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Mfk, MfkValidationService } from '@uiowa/uiowa-mfk';
+import { Mfk } from 'projects/uiowa/uiowa-mfk/src/public_api';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,6 @@ import { Mfk, MfkValidationService } from '@uiowa/uiowa-mfk';
 })
 export class AppComponent {
   mfk = new Mfk('02012101201001000000006219000001111235555');
-
-  constructor(private readonly mfkValidationService: MfkValidationService){
-    console.log(this.mfkValidationService.validateFormat(this.mfk));
-  }
+  favoriteMfks = [this.mfk];
+  mfk2 = new Mfk();
 }

@@ -1,0 +1,25 @@
+{
+  "name": "@uiowa/uiowa-mfk",
+  "version": "6.1.0",
+  "author": "Changhui Xu <changhui-xu@uiowa.edu>",
+  "description": "mfk, uiowa-mfk, uiowa-favorite-mfk",
+  "keywords": [
+    "Angular",
+    "uiowa",
+    "mfk",
+    "favorite"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/changhuixu/uiowa-mfk-project.git"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=6.0.0",
+    "@angular/core": ">=6.0.0",
+    "rxjs": ">=6.0.0",
+    "@ng-bootstrap/ng-bootstrap": ">=2.0.0",
+    "bootstrap": ">=4.0.0",
+    "@uiowa/digit-only": ">=0.0.1"
+  }
+}
