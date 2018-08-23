@@ -40,7 +40,7 @@ export class MfkFieldOption {
   ) {
     this.getFieldLabelAndLength();
 
-    this.width = this.length * 9 + 12;
+    this.width = this.length * 0.6 + 0.75;
     if (!valuePattern) {
       valuePattern = this.numericRegex;
     }
