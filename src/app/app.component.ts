@@ -1,10 +1,10 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   Mfk,
   MfkFieldOption,
   MfkFieldName,
   FavoriteMfk
-} from 'projects/uiowa/uiowa-mfk/src/public_api';
+} from '@uiowa/uiowa-mfk';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +40,12 @@ export class AppComponent {
   favoriteMfks = [new FavoriteMfk(1, 'Test', this.mfk)];
   mfk4 = new Mfk();
 
-  constructor() {}
+  mfk5 = new Mfk();
+  options5 = [new MfkFieldOption(MfkFieldName.IACT, '6128')];
+
+  constructor() {
+    this.mfk5.IACT = '6128';
+  }
 
   set() {
     if (!this.field) {

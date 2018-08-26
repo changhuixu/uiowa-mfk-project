@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DigitOnlyModule } from '@uiowa/digit-only';
 
-import { UiowaMfkModule } from 'projects/uiowa/uiowa-mfk/src/public_api';
+import { UiowaMfkModule } from '@uiowa/uiowa-mfk';
 
 import { AppComponent } from './app.component';
 
