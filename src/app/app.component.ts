@@ -43,6 +43,9 @@ export class AppComponent {
   mfk5 = new Mfk();
   options5 = [new MfkFieldOption(MfkFieldName.IACT, '6128')];
 
+  options6 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];
+  mfk6 = new Mfk();
+
   constructor() {
     this.mfk5.IACT = '6128';
   }
@@ -76,5 +79,9 @@ export class AppComponent {
   }
   reset() {
     this.options = [];
+  }
+
+  update() {
+    this.mfk6 = new Mfk('02012101201001000000006219000001111235555');
   }
 }

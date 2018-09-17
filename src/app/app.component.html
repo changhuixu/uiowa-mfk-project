@@ -83,6 +83,20 @@
 
       <hr class="my-5">
 
+      <div class="d-flex flex-column">
+        <h2>MFK input with a readonly field</h2>
+        <uiowa-mfk-input [(mfk)]="mfk6" [options]="options6"></uiowa-mfk-input>
+        <div>
+          MFK:
+          <uiowa-mfk-string [mfk]="mfk6"></uiowa-mfk-string>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="update()">Update</button>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
     </div>
 
   </div>
