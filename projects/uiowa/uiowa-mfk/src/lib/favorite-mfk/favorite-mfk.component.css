@@ -15,12 +15,14 @@ button {
 .active {
   color: #f0ad4e;
   width: 1.5rem;
+  height: 1.5rem;
   vertical-align: bottom;
 }
 
 .inactive {
   color: #867e71;
   width: 1.5rem;
+  height: 1.5rem;
   vertical-align: bottom;
 }
 button:hover .inactive {
