@@ -1,8 +1,8 @@
 {
   "name": "@uiowa/uiowa-mfk",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "author": "Changhui Xu <changhui-xu@uiowa.edu>",
-  "description": "mfk, uiowa-mfk, uiowa-favorite-mfk",
+  "description": "mfk, uiowa-mfk, uiowa-favorite-mfk, mfk-string",
   "keywords": [
     "Angular",
     "uiowa",
@@ -20,6 +20,6 @@
     "rxjs": ">=6.0.0",
     "@ng-bootstrap/ng-bootstrap": ">=2.0.0",
     "bootstrap": ">=4.0.0",
-    "@uiowa/digit-only": ">=0.0.1"
+    "@uiowa/digit-only": ">=0.0.3"
   }
 }
