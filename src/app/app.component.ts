@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  Mfk,
-  MfkFieldOption,
-  MfkFieldName,
-  FavoriteMfk
-} from '@uiowa/uiowa-mfk';
+import { MfkFieldOption, MfkFieldName, Mfk, FavoriteMfk } from 'projects/uiowa/uiowa-mfk/src/public-api';
+// import {
+//   Mfk,
+//   MfkFieldOption,
+//   MfkFieldName,
+//   FavoriteMfk
+// } from '@uiowa/uiowa-mfk';
 
 @Component({
   selector: 'app-root',

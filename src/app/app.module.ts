@@ -5,9 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DigitOnlyModule } from '@uiowa/digit-only';
 
-import { UiowaMfkModule } from '@uiowa/uiowa-mfk';
+// import { UiowaMfkModule } from '@uiowa/uiowa-mfk';
 
 import { AppComponent } from './app.component';
+import { UiowaMfkModule } from 'projects/uiowa/uiowa-mfk/src/public-api';
 
 @NgModule({
 declarations: [
@@ -17,7 +18,7 @@ declarations: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     DigitOnlyModule,
     UiowaMfkModule.forRoot()
   ],

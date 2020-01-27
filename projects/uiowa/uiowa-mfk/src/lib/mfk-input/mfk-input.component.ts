@@ -7,12 +7,12 @@ import {
   EventEmitter,
   SimpleChanges,
   ViewChildren,
-  QueryList
+  QueryList,
+  AfterViewInit
 } from '@angular/core';
 import { Mfk } from '../models/mfk';
 import { MfkFieldOption } from '../models/mfk-field-option';
 import { UiowaMfkOptionsService } from '../services/uiowa-mfk-options.service';
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { DigitOnlyDirective } from '@uiowa/digit-only';
 
 @Component({
@@ -42,7 +42,7 @@ export class MfkInputComponent implements OnInit, OnChanges, AfterViewInit {
   @Output() mfkChange = new EventEmitter<Mfk>();
 
   @ViewChildren(DigitOnlyDirective)
-  mfkInputFields: QueryList<DigitOnlyDirective>;
+  mfkInputFields!: QueryList<DigitOnlyDirective>;
 
   constructor(private readonly optionsService: UiowaMfkOptionsService) {}
 
