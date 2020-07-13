@@ -24,7 +24,7 @@ export class UiowaMfkModule {
     config: UiowaMfkConfig = {
       favoriteMfksApiUrl: 'api/myFavoriteMfks'
     }
-  ): ModuleWithProviders {
+  ): ModuleWithProviders<UiowaMfkModule> {
     return {
       ngModule: UiowaMfkModule,
       providers: [
