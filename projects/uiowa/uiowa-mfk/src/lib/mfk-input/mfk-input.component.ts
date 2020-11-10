@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   QueryList,
@@ -9,59 +10,57 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { DigitOnlyDirective } from '@uiowa/digit-only';
+import { EmptyMfk } from '../models/empty-mfk';
 import { Mfk } from '../models/mfk';
+import { MfkFieldName } from '../models/mfk-field-name';
 import { MfkFieldOption } from '../models/mfk-field-option';
+import { MfkString } from '../models/mfk-string';
 
 @Component({
-  selector: 'app-mfk-input',
+  selector: 'uiowa-mfk-input',
   templateUrl: './mfk-input.component.html',
   styleUrls: ['./mfk-input.component.css'],
 })
-export class MfkInputComponent implements OnInit {
+export class MfkInputComponent implements OnInit, OnChanges {
   private _mfk: Mfk;
   @Input()
   set mfk(mfk: Mfk) {
+    mfk = Object.assign(EmptyMfk.create(), mfk);
     this.options
       .filter((o) => o.defaultValue)
       .forEach((o) => {
-        if (!mfk[o.name]) {
-          mfk[o.name] = o.defaultValue;
-        }
+        mfk[o.name] = mfk[o.name] || o.defaultValue;
       });
-
-    this._mfk = mfk;
-  }
-  get mfk(): Mfk {
     this.options
       .filter((o) => o.readonly)
       .forEach((o) => {
         this._mfk[o.name] = o.defaultValue;
       });
+    this._mfk = mfk;
+    console.log(MfkString.stringifyMfk(this._mfk));
+  }
+  get mfk(): Mfk {
     return this._mfk;
   }
+
   @Input() options?: MfkFieldOption[] = [];
   @Output() mfkChange = new EventEmitter<Mfk>();
-
   @ViewChildren(DigitOnlyDirective)
   mfkInputFields!: QueryList<DigitOnlyDirective>;
 
-  constructor(private readonly optionsService: UiowaMfkOptionsService) {}
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mfk) {
+    if (changes.mfk && changes.mfk.currentValue) {
       this.mfk = changes.mfk.currentValue;
     }
-    if (changes.options) {
-      this.options = changes.options.currentValue;
-      this.options = this.optionsService.getOptions(this.options);
+    if (changes.options || !this.options.length) {
+      this.options = this.mergeOptions(changes.options?.currentValue);
+      this.mfk = this.mfk;
     }
   }
 
-  ngOnInit() {
-    this.options = this.optionsService.getOptions(this.options);
-  }
-
-  ngAfterViewInit(): void {}
+  ngOnInit() {}
 
   paste(e: ClipboardEvent) {
     const pastedInput: string = e.clipboardData
@@ -74,16 +73,19 @@ export class MfkInputComponent implements OnInit {
     if (pastedInput.length < 40) {
       document.execCommand('insertText', false, pastedInput);
     } else {
-      this.parseString(pastedInput);
+      const mfkString = new MfkString(pastedInput);
+      if (mfkString.isValidMfk) {
+        this.mfk = mfkString.mfk;
+      }
     }
     this.mfkChange.emit(this.mfk);
   }
 
   onKeyup(e: KeyboardEvent) {
-    this.mfkChange.emit(this.mfk);
     if (isNaN(Number(e.key))) {
       return; // only numbers can trigger auto jump feature.
     }
+    this.mfkChange.emit(this.mfk);
     const currentInputFieldName = e.target['name'];
     if (this.mfk[currentInputFieldName].length === e.target['maxLength']) {
       // auto jump to next input field when current field is full
@@ -105,7 +107,7 @@ export class MfkInputComponent implements OnInit {
 
   onKeydown(e: KeyboardEvent) {
     // handle "tab" key --> auto fill '0's if the input field has not completed
-    if (e.key !== 'tab') {
+    if (e.key !== 'Tab') {
       return;
     }
     if (e.target['readOnly']) {
@@ -114,25 +116,33 @@ export class MfkInputComponent implements OnInit {
     while (this.mfk[e.target['name']].length < e.target['maxLength']) {
       this.mfk[e.target['name']] = this.mfk[e.target['name']].concat('0');
     }
+    this.mfkChange.emit(this.mfk);
   }
 
-  private parseString(input: string) {
-    const s = input.replace(/\D/g, '');
-    if (!s || s.length < 40) {
-      return;
+  private mergeOptions(options: MfkFieldOption[] = []): MfkFieldOption[] {
+    const result: MfkFieldOption[] = [
+      new MfkFieldOption(MfkFieldName.FUND),
+      new MfkFieldOption(MfkFieldName.ORG),
+      new MfkFieldOption(MfkFieldName.DEPT),
+      new MfkFieldOption(MfkFieldName.SUBDEPT),
+      new MfkFieldOption(MfkFieldName.GRANTPGM),
+      new MfkFieldOption(MfkFieldName.IACT),
+      new MfkFieldOption(MfkFieldName.OACT),
+      new MfkFieldOption(MfkFieldName.DACT),
+      new MfkFieldOption(MfkFieldName.FN),
+      new MfkFieldOption(MfkFieldName.CCTR),
+    ];
+    if (options && options.length > 0) {
+      for (const option of options) {
+        const fieldOption = result.find((o) => o.name === option.name);
+        if (fieldOption) {
+          const index = result.indexOf(fieldOption);
+          result[index] = option;
+        } else {
+          result.push(option);
+        }
+      }
     }
-    this.mfk.fund = s.substring(0, 3);
-    this.mfk.org = s.substring(3, 5);
-    this.mfk.dept = s.substring(5, 9);
-    this.mfk.subdept = s.substring(9, 14);
-    this.mfk.grantpgm = s.substring(14, 22);
-    this.mfk.iact = s.substring(22, 26);
-    this.mfk.oact = s.substring(26, 29);
-    this.mfk.dact = s.substring(29, 34);
-    this.mfk.fn = s.substring(34, 36);
-    this.mfk.cctr = s.substring(36, 40);
-    if (s.length >= 42) {
-      this.mfk.brf = s.substring(40, 42);
-    }
+    return result;
   }
 }
