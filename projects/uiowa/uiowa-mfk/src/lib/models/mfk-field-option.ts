@@ -12,9 +12,9 @@ import { MfkFieldName } from './mfk-field-name';
  * ```
  */
 export class MfkFieldOption {
-  public label: string;
-  public width: number;
-  public length: number;
+  label: string;
+  width: number;
+  length: number;
   private readonly numericRegex = '^[0-9]+$';
   /**
    * Options for MFK field.
@@ -55,9 +55,7 @@ export class MfkFieldOption {
     if (defaultValue) {
       if (defaultValue.length !== this.length) {
         throw new Error(
-          `The default value [${defaultValue}] for ${name} is not ${
-            this.length
-          } digits long.`
+          `The default value [${defaultValue}] for ${name} is not ${this.length} digits long.`
         );
       }
 

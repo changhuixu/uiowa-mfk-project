@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { MfkFieldOption, MfkFieldName, Mfk, FavoriteMfk } from 'projects/uiowa/uiowa-mfk/src/public-api';
-// import {
-//   Mfk,
-//   MfkFieldOption,
-//   MfkFieldName,
-//   FavoriteMfk
-// } from '@uiowa/uiowa-mfk';
+import {
+  MfkFieldOption,
+  MfkFieldName,
+  Mfk,
+  MfkString,
+  EmptyMfk,
+} from 'projects/uiowa/uiowa-mfk/src/public-api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styles: [],
 })
 export class AppComponent {
   mfkFields = [
@@ -23,33 +23,31 @@ export class AppComponent {
     MfkFieldName.OACT,
     MfkFieldName.DACT,
     MfkFieldName.FN,
-    MfkFieldName.CCTR
+    MfkFieldName.CCTR,
   ];
-  mfk1 = new Mfk();
+
+  mfk1: Mfk;
 
   options1 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];
-  mfk2 = new Mfk();
+  mfk2: Mfk;
 
-  mfk3 = new Mfk();
+  mfk3: Mfk = EmptyMfk.create();
   options: MfkFieldOption[] = [];
   withBrf: boolean;
   field = '';
   defaultValue = '';
   isReadonly = false;
 
-  mfk = new Mfk('02012101201001000000006219000001111235555');
-  favoriteMfks = [new FavoriteMfk(1, 'Test', this.mfk)];
-  mfk4 = new Mfk();
+  mfkString1 = new MfkString('02012101201001000000006219000001111235555');
+  mfk4: Mfk;
 
-  mfk5 = new Mfk();
+  mfk5: Mfk = { iact: '6128' } as Mfk;
   options5 = [new MfkFieldOption(MfkFieldName.IACT, '6128')];
 
   options6 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];
-  mfk6 = new Mfk();
+  mfk6: Mfk;
 
-  constructor() {
-    this.mfk5.IACT = '6128';
-  }
+  constructor() {}
 
   set() {
     if (!this.field) {
@@ -75,7 +73,7 @@ export class AppComponent {
     if (this.withBrf) {
       this.options = [...this.options, new MfkFieldOption(MfkFieldName.BRF)];
     } else {
-      this.options = this.options.filter(x => x.name !== 'BRF');
+      this.options = this.options.filter((x) => x.name !== 'BRF');
     }
   }
   reset() {
@@ -83,6 +81,7 @@ export class AppComponent {
   }
 
   update() {
-    this.mfk6 = new Mfk('02012101201001000000006219000001111235555');
+    const s = new MfkString('02012101201001000000006219000001111235555');
+    this.mfk6 = s.mfk;
   }
 }

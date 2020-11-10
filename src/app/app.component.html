@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <hr class="my-5">
+      <hr class="my-5" />
 
       <div class="d-flex flex-column">
         <h2>MFK input with a readonly field</h2>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <hr class="my-5">
+      <hr class="my-5" />
 
       <div class="d-flex flex-column">
         <h2>MFK input with options</h2>
@@ -29,28 +29,49 @@
           <div class="mr-sm-2">
             <select class="custom-select" [(ngModel)]="field" name="field">
               <option value="">Select an MFK field</option>
-              <option *ngFor="let item of mfkFields" [ngValue]="item">{{item}}</option>
+              <option *ngFor="let item of mfkFields" [ngValue]="item">
+                {{ item }}
+              </option>
             </select>
           </div>
           <div class="mr-sm-2">
-            <input type="text" class="form-control" [(ngModel)]="defaultValue" placeholder="default value">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="defaultValue"
+              placeholder="default value"
+            />
           </div>
           <div class="mr-sm-2">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="reonly" [(ngModel)]="isReadonly">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="reonly"
+                [(ngModel)]="isReadonly"
+              />
               <label class="custom-control-label" for="reonly">ReadOnly?</label>
             </div>
           </div>
           <div class="mr-sm-2">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="brf" [(ngModel)]="withBrf">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="brf"
+                [(ngModel)]="withBrf"
+              />
               <label class="custom-control-label" for="brf">With BRF?</label>
             </div>
           </div>
         </div>
         <div>
-          <button type="button" class="btn btn-default mr-2" (click)="set()">Set</button>
-          <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
+          <button type="button" class="btn btn-primary mr-2" (click)="set()">
+            Set
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="reset()">
+            Reset
+          </button>
         </div>
         <uiowa-mfk-input [(mfk)]="mfk3" [options]="options"></uiowa-mfk-input>
         <div>
@@ -58,19 +79,13 @@
           <uiowa-mfk-string [mfk]="mfk3"></uiowa-mfk-string>
         </div>
         <div>
-          <pre>{{options | json}}</pre>
+          <pre>{{ options | json }}</pre>
         </div>
       </div>
 
-      <hr class="my-5">
+      <hr class="my-5" />
 
-      <div class="d-flex flex-column">
-        <h2>Favorite MFKs</h2>
-        <uiowa-favorite-mfk [favoriteMfks]="favoriteMfks" [(mfk)]="mfk4"></uiowa-favorite-mfk>
-        <uiowa-mfk-string [mfk]="mfk4"></uiowa-mfk-string>
-      </div>
-
-      <hr class="my-5">
+      <hr class="my-5" />
 
       <div class="d-flex flex-column">
         <h2>MFK input with a default field</h2>
@@ -81,7 +96,7 @@
         </div>
       </div>
 
-      <hr class="my-5">
+      <hr class="my-5" />
 
       <div class="d-flex flex-column">
         <h2>MFK input with a readonly field</h2>
@@ -91,15 +106,17 @@
           <uiowa-mfk-string [mfk]="mfk6"></uiowa-mfk-string>
         </div>
         <div>
-          <button type="button" class="btn btn-primary" (click)="update()">Update</button>
+          <button type="button" class="btn btn-primary" (click)="update()">
+            Update
+          </button>
         </div>
       </div>
 
-      <hr class="my-5">
-      <a title="github" href="https://github.com/changhuixu/uiowa-mfk-project">GitHub Repo</a>
-      <hr class="my-5">
-
+      <hr class="my-5" />
+      <a title="github" href="https://github.com/changhuixu/uiowa-mfk-project"
+        >GitHub Repo</a
+      >
+      <hr class="my-5" />
     </div>
-
   </div>
 </div>

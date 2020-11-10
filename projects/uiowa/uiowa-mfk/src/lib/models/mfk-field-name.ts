@@ -1,13 +1,13 @@
 export class MfkFieldName {
-  static FUND = 'FUND';
-  static ORG = 'ORG';
-  static DEPT = 'DEPT';
-  static SUBDEPT = 'SUBDEPT';
-  static GRANTPGM = 'GRANTPGM';
-  static IACT = 'IACT';
-  static OACT = 'OACT';
-  static DACT = 'DACT';
-  static FN = 'FN';
-  static CCTR = 'CCTR';
-  static BRF = 'BRF';
+  static FUND = 'fund';
+  static ORG = 'org';
+  static DEPT = 'dept';
+  static SUBDEPT = 'subdept';
+  static GRANTPGM = 'grantpgm';
+  static IACT = 'iact';
+  static OACT = 'oact';
+  static DACT = 'dact';
+  static FN = 'fn';
+  static CCTR = 'cctr';
+  static BRF = 'brf';
 }
