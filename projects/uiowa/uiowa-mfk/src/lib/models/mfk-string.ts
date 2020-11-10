@@ -33,11 +33,4 @@ export class MfkString {
     }
     this.isValidMfk = true;
   }
-
-  static stringifyMfk(mfk: Mfk): string {
-    return Object.keys(mfk)
-      .filter((k) => k !== MfkFieldName.BRF)
-      .map((k) => mfk[k])
-      .join('-');
-  }
 }

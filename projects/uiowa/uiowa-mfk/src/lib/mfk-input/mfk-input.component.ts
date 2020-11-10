@@ -37,7 +37,6 @@ export class MfkInputComponent implements OnInit, OnChanges {
         this._mfk[o.name] = o.defaultValue;
       });
     this._mfk = mfk;
-    console.log(MfkString.stringifyMfk(this._mfk));
   }
   get mfk(): Mfk {
     return this._mfk;
