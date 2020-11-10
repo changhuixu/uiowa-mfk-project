@@ -97,6 +97,36 @@
           }
         }
       }
+    },
+    "@uiowa/uiowa-mfk": {
+      "projectType": "library",
+      "root": "projects/uiowa/uiowa-mfk",
+      "sourceRoot": "projects/uiowa/uiowa-mfk/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/uiowa/uiowa-mfk/tsconfig.lib.json",
+            "project": "projects/uiowa/uiowa-mfk/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/uiowa/uiowa-mfk/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/uiowa/uiowa-mfk/tsconfig.lib.json",
+              "projects/uiowa/uiowa-mfk/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "uiowa-mfk-project",
