@@ -7,6 +7,9 @@
     "build": "ng build",
     "build:prod": "ng build --prod",
     "build:lib": "ng build @uiowa/uiowa-mfk --prod",
+    "cypress:open": "start-server-and-test start 4200 \"cypress open\"",
+    "cypress:verify": "cypress verify",
+    "cypress:run": "start-server-and-test start 4200 \"cypress run\"",
     "test": "ng test",
     "lint": "ng lint"
   },
@@ -33,7 +36,9 @@
     "@angular/compiler-cli": "~10.2.0",
     "@angular/localize": "^10.2.3",
     "@types/node": "^12.11.1",
+    "cypress": "^5.6.0",
     "ng-packagr": "^10.1.0",
+    "start-server-and-test": "^1.11.5",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"

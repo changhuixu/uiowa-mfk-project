@@ -10,11 +10,11 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { DigitOnlyDirective } from '@uiowa/digit-only';
-import { EmptyMfk } from '../models/empty-mfk';
 import { Mfk } from '../models/mfk';
 import { MfkFieldName } from '../models/mfk-field-name';
 import { MfkFieldOption } from '../models/mfk-field-option';
 import { MfkString } from '../models/mfk-string';
+import { emptyMfk } from '../models/mfk-tools';
 
 @Component({
   selector: 'uiowa-mfk-input',
@@ -25,7 +25,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
   private _mfk: Mfk;
   @Input()
   set mfk(mfk: Mfk) {
-    mfk = Object.assign(EmptyMfk.create(), mfk);
+    mfk = Object.assign(emptyMfk(), mfk);
     this.options
       .filter((o) => o.defaultValue)
       .forEach((o) => {
@@ -34,7 +34,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
     this.options
       .filter((o) => o.readonly)
       .forEach((o) => {
-        this._mfk[o.name] = o.defaultValue;
+        mfk[o.name] = o.defaultValue;
       });
     this._mfk = mfk;
   }

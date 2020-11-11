@@ -1,0 +1,77 @@
+<section id="update-mfk-value">
+  <h2>MFK input with a readonly field</h2>
+  <uiowa-mfk-input [(mfk)]="mfk1" [options]="options1"></uiowa-mfk-input>
+  <div>
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk1"></uiowa-mfk-string>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="updateMfk1()">
+      Update
+    </button>
+  </div>
+</section>
+
+<hr class="my-5" />
+
+<section id="configurable-options">
+  <h2>MFK input with configurable options</h2>
+  <div class="form-inline mb-2">
+    <div class="mr-sm-2">
+      <select class="custom-select" [(ngModel)]="field" name="field">
+        <option value="">Select an MFK field</option>
+        <option *ngFor="let item of mfkFields" [ngValue]="item">
+          {{ item }}
+        </option>
+      </select>
+    </div>
+    <div class="mr-sm-2">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="defaultValue"
+        placeholder="default value"
+      />
+    </div>
+    <div class="mr-sm-2">
+      <div class="custom-control custom-checkbox">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="reonly"
+          [(ngModel)]="isReadonly"
+        />
+        <label class="custom-control-label" for="reonly">ReadOnly?</label>
+      </div>
+    </div>
+    <div class="mr-sm-2">
+      <div class="custom-control custom-checkbox">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="brf"
+          [(ngModel)]="withBrf"
+        />
+        <label class="custom-control-label" for="brf">With BRF?</label>
+      </div>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button type="button" class="btn btn-primary mr-2" (click)="setOptions2()">
+      Set
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="resetOptions2()">
+      Reset
+    </button>
+  </div>
+  <uiowa-mfk-input [(mfk)]="mfk2" [options]="options2"></uiowa-mfk-input>
+  <div>
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk2"></uiowa-mfk-string>
+  </div>
+  <div>
+    <pre>{{ options2 | json }}</pre>
+  </div>
+</section>
+
+<hr class="my-5" />

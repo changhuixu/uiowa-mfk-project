@@ -5,6 +5,7 @@ import { Mfk } from '../models/mfk';
   selector: 'uiowa-mfk-string',
   templateUrl: './mfk-string.component.html',
   styleUrls: ['./mfk-string.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MfkStringComponent {
   @Input() mfk: Mfk;

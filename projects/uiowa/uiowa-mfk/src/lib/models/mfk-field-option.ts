@@ -12,9 +12,9 @@ import { MfkFieldName } from './mfk-field-name';
  * ```
  */
 export class MfkFieldOption {
-  label: string;
-  width: number;
-  length: number;
+  readonly label: string;
+  readonly width: number;
+  readonly length: number;
   private readonly numericRegex = '^[0-9]+$';
   /**
    * Options for MFK field.
@@ -38,47 +38,7 @@ export class MfkFieldOption {
     public readonly readonly: boolean = false,
     public readonly valuePattern: string = '^[0-9]+$'
   ) {
-    this.getFieldLabelAndLength();
-
-    this.width = this.length * 0.65 + 0.75;
-    if (!valuePattern) {
-      valuePattern = this.numericRegex;
-    }
-    if (this.readonly) {
-      if (!this.defaultValue) {
-        throw new Error(
-          `Default value for readonly field [${name}] is required.`
-        );
-      }
-      return; // if readonly, then don't validate default value
-    }
-    if (defaultValue) {
-      if (defaultValue.length !== this.length) {
-        throw new Error(
-          `The default value [${defaultValue}] for ${name} is not ${this.length} digits long.`
-        );
-      }
-
-      let reg = new RegExp(this.numericRegex);
-      if (!reg.test(defaultValue)) {
-        throw new Error(
-          `The default value [${defaultValue}] for ${name} is not a number.`
-        );
-      }
-
-      if (valuePattern !== this.numericRegex) {
-        reg = new RegExp(valuePattern);
-        if (!reg.test(defaultValue)) {
-          throw new Error(
-            `The default value [${defaultValue}] for ${name} doesn't match RegEx "${valuePattern}".`
-          );
-        }
-      }
-    }
-  }
-
-  private getFieldLabelAndLength() {
-    switch (this.name) {
+    switch (name) {
       case MfkFieldName.FUND:
         this.label = 'Fund';
         this.length = 3;
@@ -124,7 +84,45 @@ export class MfkFieldOption {
         this.length = 2;
         break;
       default:
-        throw new Error(`MFK field name [${this.name}] is invalid.`);
+        throw new Error(`MFK field name [${name.toUpperCase()}] is invalid.`);
+    }
+
+    this.width = this.length * 0.65 + 0.75;
+    if (!valuePattern) {
+      valuePattern = this.numericRegex;
+    }
+    if (this.readonly) {
+      if (!this.defaultValue) {
+        throw new Error(
+          `Default value for readonly field [${name.toUpperCase()}] is required.`
+        );
+      }
+      return; // if readonly, then don't validate default value
+    }
+    if (defaultValue) {
+      if (defaultValue.length !== this.length) {
+        throw new Error(
+          `The default value [${defaultValue}] for ${name.toUpperCase()} is not ${
+            this.length
+          } digits long.`
+        );
+      }
+
+      let reg = new RegExp(this.numericRegex);
+      if (!reg.test(defaultValue)) {
+        throw new Error(
+          `The default value [${defaultValue}] for ${name.toUpperCase()} is not a number.`
+        );
+      }
+
+      if (valuePattern !== this.numericRegex) {
+        reg = new RegExp(valuePattern);
+        if (!reg.test(defaultValue)) {
+          throw new Error(
+            `The default value [${defaultValue}] for ${name.toUpperCase()} doesn't match RegEx "${valuePattern}".`
+          );
+        }
+      }
     }
   }
 }

@@ -1,0 +1,31 @@
+<section id="default">
+  <h2>Default MFK input</h2>
+  <uiowa-mfk-input [(mfk)]="mfk1"></uiowa-mfk-input>
+  <div>
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk1"></uiowa-mfk-string>
+  </div>
+</section>
+
+<hr class="my-5" />
+
+<section id="readonly-field">
+  <h2>MFK input with a readonly field</h2>
+  <uiowa-mfk-input [(mfk)]="mfk2" [options]="options2"></uiowa-mfk-input>
+  <div>
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk2"></uiowa-mfk-string>
+  </div>
+</section>
+
+<hr class="my-5" />
+
+<section id="default-field">
+  <h2>MFK input with a default field</h2>
+  <uiowa-mfk-input [(mfk)]="mfk3" [options]="options3"></uiowa-mfk-input>
+  <div>
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk3"></uiowa-mfk-string>
+  </div>
+</section>
+<hr class="my-5" />
