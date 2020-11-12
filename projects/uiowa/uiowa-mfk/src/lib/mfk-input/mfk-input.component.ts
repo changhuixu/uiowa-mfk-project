@@ -52,6 +52,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.mfk && changes.mfk.currentValue) {
       this.mfk = changes.mfk.currentValue;
+      this.mfkChange.emit(this.mfk);
     }
     if (changes.options || !this.options.length) {
       this.options = this.mergeOptions(changes.options?.currentValue);
@@ -65,13 +66,10 @@ export class MfkInputComponent implements OnInit, OnChanges {
     const pastedInput: string = e.clipboardData
       .getData('text/plain')
       .replace(/\D/g, ''); // get a digit-only string
-    e.preventDefault();
     if (!pastedInput) {
       return;
     }
-    if (pastedInput.length < 40) {
-      document.execCommand('insertText', false, pastedInput);
-    } else {
+    if (pastedInput.length >= 40) {
       const mfkString = new MfkString(pastedInput);
       if (mfkString.isValidMfk) {
         this.mfk = mfkString.mfk;
@@ -81,10 +79,10 @@ export class MfkInputComponent implements OnInit, OnChanges {
   }
 
   onKeyup(e: KeyboardEvent) {
+    this.mfkChange.emit(this.mfk);
     if (isNaN(Number(e.key))) {
       return; // only numbers can trigger auto jump feature.
     }
-    this.mfkChange.emit(this.mfk);
     const currentInputFieldName = e.target['name'];
     if (this.mfk[currentInputFieldName].length === e.target['maxLength']) {
       // auto jump to next input field when current field is full

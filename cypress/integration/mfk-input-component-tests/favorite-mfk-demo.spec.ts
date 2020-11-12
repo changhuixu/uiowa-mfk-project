@@ -136,4 +136,25 @@ describe('Favorite MFK Demos', () => {
       .invoke('text')
       .should('be.equal', '020-12-1012-01008-00000000-6219-000-00111-12-3555');
   });
+
+  it('should correctly remove a favorite MFK', () => {
+    cy.get('.dropdown-toggle').click();
+    cy.get('.dropdown-menu > :first').should('contain.text', 'Test').click();
+
+    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('#mfk-string > uiowa-mfk-string')
+      .invoke('text')
+      .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
+
+    cy.on('window:confirm', (str) => {
+      expect(str).to.eq('Are you sure to remove this MFK?');
+    });
+    cy.get('[name="favorite-btn"] svg').click();
+
+    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('.dropdown-toggle').click();
+    cy.get('.dropdown-menu li').should(($li) => {
+      expect($li).to.have.length(2);
+    });
+  });
 });
