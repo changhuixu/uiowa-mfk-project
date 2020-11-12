@@ -28,7 +28,6 @@ export class FavoriteMfkComponent implements OnInit {
   }
 
   onMfkInputChange(inputMfk: Mfk) {
-    debugger;
     this.mfk = inputMfk;
     this.isIconActive = this.isInFavorites();
   }

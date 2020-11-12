@@ -26,8 +26,8 @@ export class ActionsComponent implements OnInit {
     MfkFieldName.CCTR,
   ];
   withBrf: boolean;
-  field = '';
-  defaultValue = '';
+  field = 'iact';
+  defaultValue = '6218';
   isReadonly = false;
   mfk1: Mfk;
   options1 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];

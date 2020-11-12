@@ -1,8 +1,10 @@
+<p class="h2">Favorite MFK</p>
 <section id="favorite-mfk-group" class="d-inline-flex">
   <div style="vertical-align: bottom; margin-right: -7px">
     <p class="favorite-label">Favorite MFK</p>
     <div class="btn-group">
       <button
+        name="favorite-btn"
         type="button"
         class="btn btn-light"
         (click)="onFavoriteIconClick()"
@@ -87,4 +89,9 @@
       />
     </svg>
   </ng-template>
+</section>
+
+<section id="mfk-string">
+  MFK:
+  <uiowa-mfk-string [mfk]="mfk"></uiowa-mfk-string>
 </section>

@@ -26,6 +26,9 @@ export function areEqual(mfk1: Mfk, mfk2: Mfk): boolean {
  * @param mfk An Mfk object
  */
 export function stringify(mfk: Mfk): string {
+  if (!mfk) {
+    return '';
+  }
   const s = Object.keys(mfk)
     .filter((k) => k !== MfkFieldName.BRF)
     .map((k) => mfk[k])

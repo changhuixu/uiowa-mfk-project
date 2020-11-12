@@ -1,12 +1,17 @@
 <section id="update-mfk-value">
-  <h2>MFK input with a readonly field</h2>
+  <p class="h2">MFK input with a readonly field</p>
   <uiowa-mfk-input [(mfk)]="mfk1" [options]="options1"></uiowa-mfk-input>
-  <div>
+  <div id="mfk1-string">
     MFK:
     <uiowa-mfk-string [mfk]="mfk1"></uiowa-mfk-string>
   </div>
   <div>
-    <button type="button" class="btn btn-primary" (click)="updateMfk1()">
+    <button
+      id="update-value1-btn"
+      type="button"
+      class="btn btn-primary"
+      (click)="updateMfk1()"
+    >
       Update
     </button>
   </div>
@@ -15,7 +20,7 @@
 <hr class="my-5" />
 
 <section id="configurable-options">
-  <h2>MFK input with configurable options</h2>
+  <p class="h2">MFK input with configurable options</p>
   <div class="form-inline mb-2">
     <div class="mr-sm-2">
       <select class="custom-select" [(ngModel)]="field" name="field">
@@ -57,15 +62,25 @@
     </div>
   </div>
   <div class="mb-2">
-    <button type="button" class="btn btn-primary mr-2" (click)="setOptions2()">
+    <button
+      id="set-option2-btn"
+      type="button"
+      class="btn btn-primary mr-2"
+      (click)="setOptions2()"
+    >
       Set
     </button>
-    <button type="button" class="btn btn-secondary" (click)="resetOptions2()">
+    <button
+      id="reset-option2-btn"
+      type="button"
+      class="btn btn-secondary"
+      (click)="resetOptions2()"
+    >
       Reset
     </button>
   </div>
   <uiowa-mfk-input [(mfk)]="mfk2" [options]="options2"></uiowa-mfk-input>
-  <div>
+  <div id="mfk2-string">
     MFK:
     <uiowa-mfk-string [mfk]="mfk2"></uiowa-mfk-string>
   </div>
