@@ -1,6 +1,16 @@
 <section id="update-mfk-value">
   <p class="h2">MFK Validations</p>
-  <uiowa-mfk-input [(mfk)]="mfk1"></uiowa-mfk-input>
+  <div class="form-inline">
+    <label
+      for="mfk-container_mfk1"
+      style="width: 100px"
+      class="font-weight-bold justify-content-start"
+    >
+      MFK
+    </label>
+    <uiowa-mfk-input id="mfk1" [(mfk)]="mfk1"></uiowa-mfk-input>
+  </div>
+
   <div id="mfk1-string">
     MFK:
     <uiowa-mfk-string [mfk]="mfk1"></uiowa-mfk-string>

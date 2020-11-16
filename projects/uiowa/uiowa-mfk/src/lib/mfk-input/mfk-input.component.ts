@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -46,8 +47,20 @@ export class MfkInputComponent implements OnInit, OnChanges {
   @Output() mfkChange = new EventEmitter<Mfk>();
   @ViewChildren(DigitOnlyDirective)
   mfkInputFields!: QueryList<DigitOnlyDirective>;
+  elementId = 'mfk-container_';
+  elementName = 'mfk-container_';
 
-  constructor() {}
+  constructor(el: ElementRef) {
+    const rand = Math.random().toString(36).substring(2);
+    this.elementId +=
+      el.nativeElement.getAttribute('id') ||
+      el.nativeElement.getAttribute('name') ||
+      rand;
+    this.elementName +=
+      el.nativeElement.getAttribute('name') ||
+      el.nativeElement.getAttribute('id') ||
+      rand;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.mfk && changes.mfk.currentValue) {
@@ -83,6 +96,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
     if (isNaN(Number(e.key))) {
       return; // only numbers can trigger auto jump feature.
     }
+    debugger
     const currentInputFieldName = e.target['name'];
     if (this.mfk[currentInputFieldName].length === e.target['maxLength']) {
       // auto jump to next input field when current field is full

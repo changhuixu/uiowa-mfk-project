@@ -1,15 +1,21 @@
-<div id="mfk-container">
-  <div
-    class="mfk-field"
-    *ngFor="let option of options"
-    [style.width.rem]="option.width"
-  >
-    <p class="mfk-field-label">{{ option.label }}</p>
+<form
+  id="{{ elementId }}"
+  name="{{ elementName }}"
+  [attr.name]="elementName"
+  class="mfk-container"
+>
+  <div class="mfk-field" *ngFor="let option of options">
+    <label for="{{ elementId + option.name }}" class="mfk-field-label">
+      {{ option.label }}
+    </label>
     <input
       type="text"
-      class="form-control"
-      [attr.aria-label]="option.name"
+      id="{{ elementId + option.name }}"
+      name="{{ option.name }}"
       [attr.name]="option.name"
+      class="form-control"
+      [style.width.rem]="option.width"
+      [attr.aria-label]="option.name"
       [attr.maxlength]="option.length"
       [readOnly]="option.readonly"
       [(ngModel)]="mfk[option.name]"
@@ -21,4 +27,4 @@
       digitOnly
     />
   </div>
-</div>
+</form>
