@@ -96,7 +96,6 @@ export class MfkInputComponent implements OnInit, OnChanges {
     if (isNaN(Number(e.key))) {
       return; // only numbers can trigger auto jump feature.
     }
-    debugger
     const currentInputFieldName = e.target['name'];
     if (this.mfk[currentInputFieldName].length === e.target['maxLength']) {
       // auto jump to next input field when current field is full

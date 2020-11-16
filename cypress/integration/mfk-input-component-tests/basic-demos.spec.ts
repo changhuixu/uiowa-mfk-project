@@ -21,6 +21,16 @@ describe('Basic Demos', () => {
     );
   });
 
+  it('default mfk fields labels and inputs should be center', () => {
+    cy.get(
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > label'
+    ).should('have.css', 'text-align', 'center');
+
+    cy.get(
+      ' #default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
+    ).should('have.css', 'text-align', 'center');
+  });
+
   it('should display correct initial MFK strings for all basic demos', () => {
     cy.get('#mfk1-string > uiowa-mfk-string ').then((el) => {
       expect(el.length).to.be.equal(1);
