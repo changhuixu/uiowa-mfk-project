@@ -22,12 +22,12 @@ describe('Favorite MFK Demos', () => {
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
 
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :last').click();
 
-    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('[type="button"] svg').should('not.have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '---------');
@@ -37,7 +37,7 @@ describe('Favorite MFK Demos', () => {
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :first').should('contain.text', 'Test').click();
 
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
@@ -53,7 +53,7 @@ describe('Favorite MFK Demos', () => {
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :last').click();
 
-    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('[type="button"] svg').should('not.have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '---------');
@@ -81,20 +81,20 @@ describe('Favorite MFK Demos', () => {
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '260-43-5064-40100-00000000-6026-520-20100-00-0000');
-    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('[type="button"] svg').should('not.have.class', 'active');
 
     cy.window().then((win) => {
       cy.stub(win, 'prompt').returns('My MFK');
-      cy.get('[name="favorite-btn"] svg').click();
+      cy.get('[type="button"] svg').click();
     });
 
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :nth-child(2)').should('contain.text', 'My MFK');
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
 
     cy.get('.dropdown-menu > :first').should('contain.text', 'Test').click();
 
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
@@ -104,7 +104,7 @@ describe('Favorite MFK Demos', () => {
       .should('contain.text', 'My MFK')
       .click();
 
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '260-43-5064-40100-00000000-6026-520-20100-00-0000');
@@ -114,24 +114,24 @@ describe('Favorite MFK Demos', () => {
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :first').should('contain.text', 'Test').click();
 
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
     cy.get(':nth-child(3) > .form-control').type('{backspace}');
-    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('[type="button"] svg').should('not.have.class', 'active');
     cy.get(':nth-child(3) > .form-control').type('2');
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
 
     cy.get(':nth-child(3) > .form-control').type('{backspace}2');
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
     cy.get(':nth-child(4) > .form-control').type('{backspace}8');
-    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('[type="button"] svg').should('not.have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01008-00000000-6219-000-00111-12-3555');
@@ -141,7 +141,7 @@ describe('Favorite MFK Demos', () => {
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :first').should('contain.text', 'Test').click();
 
-    cy.get('[name="favorite-btn"] svg').should('have.class', 'active');
+    cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
@@ -149,9 +149,9 @@ describe('Favorite MFK Demos', () => {
     cy.on('window:confirm', (str) => {
       expect(str).to.eq('Are you sure to remove this MFK?');
     });
-    cy.get('[name="favorite-btn"] svg').click();
+    cy.get('[type="button"] svg').click();
 
-    cy.get('[name="favorite-btn"] svg').should('not.have.class', 'active');
+    cy.get('[type="button"] svg').should('not.have.class', 'active');
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu li').should(($li) => {
       expect($li).to.have.length(2);

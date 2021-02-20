@@ -3,8 +3,9 @@
 }
 
 .mfk-field {
-  display: inline-block;
-  vertical-align: bottom;
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
   text-align: center;
   margin-right: 0.25rem;
 }

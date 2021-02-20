@@ -1,27 +1,35 @@
-button {
-  padding: 0.3rem 0.5rem 0.45rem 0.5rem;
-  border: 1px solid #dddddd;
+.favorite-field {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 0.5rem;
 }
+
 .favorite-label {
   margin-bottom: 0;
-  text-align: center;
   white-space: nowrap;
   font-size: 0.625rem;
 }
 
-.active {
+.favorite-field button {
+  padding: 6px 0.5rem;
+  border: 1px solid #dddddd;
+}
+
+.favorite-field button .active {
   color: #f0ad4e;
   width: 1.5rem;
   height: 1.5rem;
   vertical-align: bottom;
 }
 
-.inactive {
+.favorite-field button .inactive {
   color: #867e71;
   width: 1.5rem;
   height: 1.5rem;
   vertical-align: bottom;
 }
-button:hover .inactive {
+.favorite-field button:hover .inactive {
   color: #f0ad4e;
 }

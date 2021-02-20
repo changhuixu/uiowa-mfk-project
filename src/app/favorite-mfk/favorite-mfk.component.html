@@ -1,10 +1,9 @@
 <p class="h2">Favorite MFK</p>
 <section id="favorite-mfk-group" class="d-inline-flex">
-  <div style="vertical-align: bottom; margin-right: -7px">
+  <div class="favorite-field">
     <p class="favorite-label">Favorite MFK</p>
     <div class="btn-group">
       <button
-        name="favorite-btn"
         type="button"
         class="btn btn-light"
         (click)="onFavoriteIconClick()"
@@ -70,7 +69,6 @@
   <uiowa-mfk-input
     [(mfk)]="mfk"
     [options]="options"
-    style="padding-left: 15px"
     (mfkChange)="onMfkInputChange($event)"
   ></uiowa-mfk-input>
 
