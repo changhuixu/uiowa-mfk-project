@@ -1,0 +1,20 @@
+.mfk-line {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+}
+.mfk-line:not(:first-child) {
+  border-top: 1px dashed gray;
+}
+
+.percentage-field {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.percentage-label {
+  margin-bottom: 0;
+  white-space: nowrap;
+  font-size: 0.625rem;
+}
