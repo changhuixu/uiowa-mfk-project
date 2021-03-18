@@ -41,8 +41,8 @@ export class SplitCostComponent implements OnInit {
     this.id++;
     this.accounts.push({
       id: this.id,
-      mfk: emptyMfk(),
-      percentage: 0,
+      mfk: this.accounts[0].mfk,
+      percentage: null,
     });
     this.updateTotal();
   }

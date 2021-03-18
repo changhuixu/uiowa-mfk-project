@@ -9,6 +9,11 @@ import {
 interface MfkValidationResult {
   statusCode: number;
   statusMessage: string;
+  descriptions: {
+    fundDesc: string;
+    orgDesc: string;
+    deptDesc: string;
+  };
 }
 
 @Component({
@@ -40,7 +45,26 @@ export class MfkValidationsComponent implements OnInit {
       this.validationResult = {
         statusCode: +parts[0],
         statusMessage: parts[1].trim(),
+        descriptions: this.parseMfkComponents(parts[2])
       } as MfkValidationResult;
     });
+  }
+
+  private parseMfkComponents(s: string) {
+    var components = s.split(',');
+    return {
+      fundDesc: components
+        .filter((c) => c.trim().startsWith('FUND='))[0]
+        .split('=')[1],
+      orgDesc: components
+        .filter((c) => c.trim().startsWith('ORG='))[0]
+        .split('=')[1],
+      deptDesc: components
+        .filter((c) => c.trim().startsWith('DEPT='))[0]
+        .split('=')[1],
+      iactDesc: components
+        .filter((c) => c.trim().startsWith('IACT='))[0]
+        .split('=')[1],
+    };
   }
 }
