@@ -45,7 +45,7 @@
     class="d-flex justify-content-between align-items-center mt-2"
     style="border-top: 3px solid black"
   >
-    <button type="button" class="btn btn-link" (click)="addMfk()">
+    <button id="addBtn" type="button" class="btn btn-link" (click)="addMfk()">
       Add an MFK
     </button>
     <div>
@@ -62,7 +62,55 @@
   </div>
 </section>
 
-<section id="results" class="mt-5 overflow-auto" style="max-height: 300px;">
-  Accounts:
-  <pre class="bg-light">{{ accounts | json }}</pre>
+<section class="my-2">
+  <button
+    id="saveBtn"
+    type="button"
+    class="btn btn-primary"
+    [disabled]="total != 100"
+    (click)="open(confirmModal)"
+  >
+    Save Accounts
+  </button>
+  <div *ngFor="let item of errorMsgs" class="text-danger">
+    {{ item }}
+  </div>
 </section>
+
+<ng-template #confirmModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Confirm Accounts</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body p-3">
+    <section id="results" class="overflow-auto" style="max-height: 300px">
+      Accounts:
+      <pre class="bg-light">{{ accounts | json }}</pre>
+    </section>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark mr-2"
+      (click)="modal.close()"
+    >
+      No. I changed my mind.
+    </button>
+    <button
+      id="confirmBtn"
+      type="button"
+      [disabled]="busy"
+      class="btn btn-primary"
+      (click)="save()"
+    >
+      Yes. I confirm.
+    </button>
+  </div>
+</ng-template>

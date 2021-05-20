@@ -1,5 +1,4 @@
 import { Mfk } from './mfk';
-import { MfkFieldName } from './mfk-field-name';
 
 export class MfkString {
   /**

@@ -3,6 +3,7 @@ import {
   areEqual,
   stringify,
   emptyMfk,
+  validFormat,
 } from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 describe('Unit Test MfkTools functions', () => {
@@ -190,6 +191,53 @@ describe('Unit Test MfkTools functions', () => {
       const m2 = emptyMfk();
       expect(m1).to.not.equal(m2);
       expect(m1).to.deep.equal(m2);
+    });
+  });
+
+  context('validateFormat function tests', () => {
+    it('should return false for an empty Mfk object', () => {
+      const m: Mfk = {} as Mfk;
+      expect(validFormat(m)).to.be.false;
+    });
+
+    it('should return false for a partial Mfk object', () => {
+      const m: Mfk = {
+        iact: '6218',
+      } as Mfk;
+      expect(validFormat(m)).to.be.false;
+    });
+
+    it('should return correct string for an Mfk object', () => {
+      const m: Mfk = {
+        fund: '020',
+        org: '12',
+        dept: '1012',
+        subdept: '01001',
+        grantpgm: '00000000',
+        iact: '6219',
+        oact: '000',
+        dact: '00111',
+        fn: '12',
+        cctr: '3555',
+      } as Mfk;
+      expect(validFormat(m)).to.be.true;
+    });
+
+    it('should return correct string for an Mfk object with Brf', () => {
+      const m: Mfk = {
+        fund: '020',
+        org: '12',
+        dept: '1012',
+        subdept: '01001',
+        grantpgm: '00000000',
+        iact: '6219',
+        oact: '000',
+        dact: '00111',
+        fn: '12',
+        cctr: '3555',
+        brf: '00',
+      } as Mfk;
+      expect(validFormat(m)).to.be.true;
     });
   });
 });

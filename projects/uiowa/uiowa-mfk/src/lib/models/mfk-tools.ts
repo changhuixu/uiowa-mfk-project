@@ -53,3 +53,17 @@ export function emptyMfk(): Mfk {
     cctr: '',
   };
 }
+
+/**
+ * checks if an Mfk object is in a valid format
+ */
+export function validFormat(mfk: Mfk): boolean {
+  var mfkString = stringify(mfk);
+  if (mfkString.length !== 49) {
+    return false;
+  }
+  if (mfk.brf && mfk.brf.length !== 2) {
+    return false;
+  }
+  return true;
+}
