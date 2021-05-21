@@ -15,11 +15,11 @@ import { FavoriteMfkService } from './services/favorite-mfk.service';
   styleUrls: ['./favorite-mfk.component.css'],
 })
 export class FavoriteMfkComponent implements OnInit {
-  favoriteMfks: FavoriteMfk[];
+  favoriteMfks: FavoriteMfk[] = [];
   mfk: Mfk = emptyMfk();
-  options?: MfkFieldOption[] = [];
+  options: MfkFieldOption[] = [];
 
-  favoriteIconTitle: string;
+  favoriteIconTitle: string = '';
   isIconActive = false;
   constructor(private readonly svc: FavoriteMfkService) {}
 
@@ -40,7 +40,8 @@ export class FavoriteMfkComponent implements OnInit {
       return;
     }
     if (this.isInFavorites()) {
-      const id = this.favoriteMfks.find((x) => areEqual(this.mfk, x.mfk)).id;
+      const id =
+        this.favoriteMfks.find((x) => areEqual(this.mfk, x.mfk))?.id ?? 0;
       if (confirm('Are you sure to remove this MFK?')) {
         this.svc.deleteMyFavoriteMfk(id).subscribe((x) => {
           this.favoriteMfks = x;
@@ -65,17 +66,16 @@ export class FavoriteMfkComponent implements OnInit {
     }
   }
 
-  onSelect(selectedMfk: FavoriteMfk = null) {
-    if (!selectedMfk) {
-      // clear MFK
-      this.mfk = emptyMfk();
-      this.options
-        .filter((o) => o.defaultValue)
-        .forEach((o) => (this.mfk[o.name] = o.defaultValue));
-    } else {
-      this.mfk = selectedMfk.mfk;
-    }
+  onSelect(selectedMfk: FavoriteMfk) {
+    this.mfk = selectedMfk.mfk;
     this.isIconActive = this.isInFavorites();
+  }
+
+  clear() {
+    this.mfk = emptyMfk();
+    this.options
+      .filter((o) => o.defaultValue)
+      .forEach((o) => (this.mfk[o.name] = o.defaultValue));
   }
 
   private isInFavorites(): boolean {

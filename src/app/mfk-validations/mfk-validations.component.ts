@@ -5,6 +5,7 @@ import {
   MfkString,
   stringify,
 } from 'projects/uiowa/uiowa-mfk/src/public-api';
+import { emptyMfk } from '@uiowa/uiowa-mfk';
 
 interface MfkValidationResult {
   statusCode: number;
@@ -22,8 +23,12 @@ interface MfkValidationResult {
   styleUrls: ['./mfk-validations.component.css'],
 })
 export class MfkValidationsComponent implements OnInit {
-  mfk1: Mfk;
-  validationResult: MfkValidationResult;
+  mfk1: Mfk = emptyMfk();
+  validationResult: MfkValidationResult = {
+    statusCode: 0,
+    statusMessage: '',
+    descriptions: { fundDesc: '', orgDesc: '', deptDesc: '' },
+  } as MfkValidationResult;
 
   constructor(private readonly httpClient: HttpClient) {}
 
@@ -45,7 +50,7 @@ export class MfkValidationsComponent implements OnInit {
       this.validationResult = {
         statusCode: +parts[0],
         statusMessage: parts[1].trim(),
-        descriptions: this.parseMfkComponents(parts[2])
+        descriptions: this.parseMfkComponents(parts[2]),
       } as MfkValidationResult;
     });
   }

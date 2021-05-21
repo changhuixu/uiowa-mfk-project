@@ -1,10 +1,10 @@
+import { Mfk } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk';
 import {
-  Mfk,
   areEqual,
-  stringify,
   emptyMfk,
+  stringify,
   validFormat,
-} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
+} from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-tools';
 
 describe('Unit Test MfkTools functions', () => {
   before(() => {

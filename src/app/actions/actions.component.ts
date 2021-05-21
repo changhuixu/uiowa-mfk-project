@@ -25,11 +25,11 @@ export class ActionsComponent implements OnInit {
     MfkFieldName.FN,
     MfkFieldName.CCTR,
   ];
-  withBrf: boolean;
-  field = 'iact';
+  withBrf: boolean = false;
+  field = MfkFieldName.IACT;
   defaultValue = '6218';
   isReadonly = false;
-  mfk1: Mfk;
+  mfk1: Mfk = emptyMfk();
   options1 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];
   mfk2: Mfk = emptyMfk();
   options2: MfkFieldOption[] = [];
@@ -63,7 +63,9 @@ export class ActionsComponent implements OnInit {
           new MfkFieldOption(MfkFieldName.BRF),
         ];
       } else {
-        this.options2 = this.options2.filter((x) => x.name !== 'BRF');
+        this.options2 = this.options2.filter(
+          (x) => x.name !== MfkFieldName.BRF
+        );
       }
     } catch (e) {
       alert(e);

@@ -8,5 +8,5 @@ import { Mfk } from '../models/mfk';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MfkStringComponent {
-  @Input() mfk: Mfk;
+  @Input() mfk: Mfk | null | undefined = null;
 }

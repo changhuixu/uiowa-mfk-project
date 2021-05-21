@@ -1,8 +1,6 @@
-import {
-  MfkString,
-  Mfk,
-  areEqual,
-} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
+import { Mfk } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk';
+import { MfkString } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-string';
+import { areEqual } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-tools';
 
 describe('Unit Test MfkString class', () => {
   before(() => {

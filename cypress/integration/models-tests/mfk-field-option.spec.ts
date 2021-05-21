@@ -1,8 +1,6 @@
-import {
-  Mfk,
-  MfkFieldName,
-  MfkFieldOption,
-} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
+import { MfkFieldName } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-field-name';
+import { MfkFieldOption } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-field-option';
+
 
 describe('Unit Test MfkFieldOption class', () => {
   before(() => {

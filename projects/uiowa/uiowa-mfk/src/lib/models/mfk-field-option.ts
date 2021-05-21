@@ -1,3 +1,4 @@
+import { Mfk } from './mfk';
 import { MfkFieldName } from './mfk-field-name';
 
 /**
@@ -33,7 +34,7 @@ export class MfkFieldOption {
    * @param valuePattern (Optional) set a regex for this field. Default: '^[0-9]+$'.
    */
   constructor(
-    public readonly name: string,
+    public readonly name: keyof Mfk,
     public readonly defaultValue: string = '',
     public readonly readonly: boolean = false,
     public readonly valuePattern: string = '^[0-9]+$'

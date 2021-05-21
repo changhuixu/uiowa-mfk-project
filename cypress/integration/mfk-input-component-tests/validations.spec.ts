@@ -11,6 +11,7 @@ describe('MFK Validations', () => {
       .should('be.equal', '260-43-5064-40100-00000000-6026-520-20100-00-0000');
 
     cy.get('button#validate-btn').click();
+    cy.wait(1000);
 
     cy.get('pre').then(($el) => {
       const json = $el[0].textContent || '';
@@ -43,6 +44,7 @@ describe('MFK Validations', () => {
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
     cy.get('button#validate-btn').click();
+    cy.wait(1000);
 
     cy.get('pre').then(($el) => {
       const json = $el[0].textContent || '';

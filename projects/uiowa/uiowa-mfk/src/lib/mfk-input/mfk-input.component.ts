@@ -23,7 +23,7 @@ import { emptyMfk } from '../models/mfk-tools';
   styleUrls: ['./mfk-input.component.css'],
 })
 export class MfkInputComponent implements OnInit, OnChanges {
-  private _mfk: Mfk;
+  private _mfk: Mfk = emptyMfk();
   @Input()
   set mfk(mfk: Mfk) {
     mfk = Object.assign(emptyMfk(), mfk);
@@ -43,7 +43,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
     return this._mfk;
   }
 
-  @Input() options?: MfkFieldOption[] = [];
+  @Input() options: MfkFieldOption[] = [];
   @Output() mfkChange = new EventEmitter<Mfk>();
   @ViewChildren(DigitOnlyDirective)
   mfkInputFields!: QueryList<DigitOnlyDirective>;
@@ -76,9 +76,8 @@ export class MfkInputComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   paste(e: ClipboardEvent) {
-    const pastedInput: string = e.clipboardData
-      .getData('text/plain')
-      .replace(/\D/g, ''); // get a digit-only string
+    const pastedInput: string =
+      e.clipboardData?.getData('text/plain').replace(/\D/g, '') ?? ''; // get a digit-only string
     if (!pastedInput) {
       return;
     }
@@ -96,11 +95,13 @@ export class MfkInputComponent implements OnInit, OnChanges {
     if (isNaN(Number(e.key))) {
       return; // only numbers can trigger auto jump feature.
     }
-    const currentInputFieldName = e.target['name'];
-    if (this.mfk[currentInputFieldName].length === e.target['maxLength']) {
+
+    const target = e.target as HTMLInputElement;
+    const fieldName = target.name as keyof Mfk;
+    if (this.mfk[fieldName]?.length === target.maxLength) {
       // auto jump to next input field when current field is full
       const currentInputFieldIndex = this.options.findIndex(
-        (o) => o.name === currentInputFieldName
+        (o) => o.name === fieldName
       );
       for (let i = currentInputFieldIndex + 1; i < this.options.length; i++) {
         if (this.options[i].readonly) {
@@ -109,7 +110,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
         const nextInputField = this.mfkInputFields.find(
           (v) => v.el.nativeElement['name'] === this.options[i].name
         );
-        nextInputField.el.nativeElement.focus();
+        nextInputField?.el.nativeElement.focus();
         break;
       }
     }
@@ -120,11 +121,14 @@ export class MfkInputComponent implements OnInit, OnChanges {
     if (e.key !== 'Tab') {
       return;
     }
-    if (e.target['readOnly']) {
+
+    const target = e.target as HTMLInputElement;
+    if (target.readOnly) {
       return;
     }
-    while (this.mfk[e.target['name']].length < e.target['maxLength']) {
-      this.mfk[e.target['name']] = this.mfk[e.target['name']].concat('0');
+    const fieldName = target.name as keyof Mfk;
+    while (this.mfk[fieldName]!.length < target.maxLength) {
+      this.mfk[fieldName] = this.mfk[fieldName]!.concat('0');
     }
     this.mfkChange.emit(this.mfk);
   }

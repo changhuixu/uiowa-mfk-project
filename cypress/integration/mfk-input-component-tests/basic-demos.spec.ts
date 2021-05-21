@@ -34,11 +34,11 @@ describe('Basic Demos', () => {
   it('should display correct initial MFK strings for all basic demos', () => {
     cy.get('#mfk1-string > uiowa-mfk-string ').then((el) => {
       expect(el.length).to.be.equal(1);
-      expect(el[0].innerText).to.be.equal('');
+      expect(el[0].innerText).to.be.equal('---------');
     });
     cy.get('#mfk2-string > uiowa-mfk-string ').then((el) => {
       expect(el.length).to.be.equal(1);
-      expect(el[0].innerText).to.be.equal('');
+      expect(el[0].innerText).to.be.equal('-----xxxx----');
     });
     cy.get<HTMLElement[]>('#mfk3-string > uiowa-mfk-string > span > span').then(
       (spans) => {
@@ -274,7 +274,7 @@ describe('Basic Demos', () => {
       .should('have.attr', 'readonly');
     cy.get('#mfk2-string > uiowa-mfk-string')
       .invoke('text')
-      .should('be.equal', '');
+      .should('be.equal', '-----xxxx----');
   });
 
   it('MFK input with a readonly field -- typing numbers - should skip the readonly field', () => {

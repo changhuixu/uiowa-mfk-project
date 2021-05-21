@@ -12,8 +12,8 @@ import {
   styleUrls: ['./demos.component.css'],
 })
 export class DemosComponent implements OnInit {
-  mfk1: Mfk;
-  mfk2: Mfk;
+  mfk1: Mfk = emptyMfk();
+  mfk2: Mfk = emptyMfk();
   options2 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];
   mfk3: Mfk = { iact: '6128' } as Mfk;
   options3 = [new MfkFieldOption(MfkFieldName.IACT, '6128')];

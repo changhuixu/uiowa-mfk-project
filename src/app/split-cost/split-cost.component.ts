@@ -11,7 +11,7 @@ import {
 interface Account {
   id: number;
   mfk: Mfk;
-  percentage: number;
+  percentage: number | null;
 }
 
 @Component({
@@ -24,7 +24,7 @@ export class SplitCostComponent implements OnInit {
   total = 0;
   id = 0;
   errorMsgs: string[] = [];
-  private modalRef: NgbModalRef;
+  private modalRef: NgbModalRef | null = null;
   busy = false;
 
   constructor(private modalService: NgbModal) {}
@@ -93,6 +93,6 @@ export class SplitCostComponent implements OnInit {
     this.busy = true;
     console.log(this.accounts);
     this.busy = false;
-    this.modalRef.close();
+    this.modalRef?.close();
   }
 }

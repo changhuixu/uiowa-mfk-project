@@ -14,7 +14,7 @@ export function areEqual(mfk1: Mfk, mfk2: Mfk): boolean {
     return false;
   }
   for (const k of Object.keys(mfk1)) {
-    if (mfk1[k] !== mfk2[k]) {
+    if (mfk1[k as keyof Mfk] !== mfk2[k as keyof Mfk]) {
       return false;
     }
   }
@@ -25,13 +25,13 @@ export function areEqual(mfk1: Mfk, mfk2: Mfk): boolean {
  * converts an Mfk object to a string by joining 10 fields with '-' symbol.
  * @param mfk An Mfk object
  */
-export function stringify(mfk: Mfk): string {
+export function stringify(mfk: Mfk | null): string {
   if (!mfk) {
     return '';
   }
   const s = Object.keys(mfk)
     .filter((k) => k !== MfkFieldName.BRF)
-    .map((k) => mfk[k])
+    .map((k) => mfk[k as keyof Mfk])
     .join('-');
   return s;
 }

@@ -14,7 +14,7 @@ before_script:
 
 script:
   - npm run build:lib
-  - npm run build:prod
+  - npm run build
   - npm run cypress:verify
   - npm run cypress:run
 
