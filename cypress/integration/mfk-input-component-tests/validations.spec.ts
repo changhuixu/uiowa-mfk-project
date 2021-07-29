@@ -10,8 +10,13 @@ describe('MFK Validations', () => {
       .invoke('text')
       .should('be.equal', '260-43-5064-40100-00000000-6026-520-20100-00-0000');
 
+    cy.intercept({
+      method: 'GET',
+      url: 'https://apps.its.uiowa.edu/mfk/**',
+    }).as('validation');
+
     cy.get('button#validate-btn').click();
-    cy.wait(1000);
+    cy.wait('@validation');
 
     cy.get('pre').then(($el) => {
       const json = $el[0].textContent || '';
@@ -43,8 +48,12 @@ describe('MFK Validations', () => {
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
+    cy.intercept({
+      method: 'GET',
+      url: 'https://apps.its.uiowa.edu/mfk/**',
+    }).as('validation');
     cy.get('button#validate-btn').click();
-    cy.wait(1000);
+    cy.wait('@validation');
 
     cy.get('pre').then(($el) => {
       const json = $el[0].textContent || '';
