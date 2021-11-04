@@ -34,7 +34,7 @@ describe('MFK Validations', () => {
       cancelable: true,
     });
 
-    cy.get(':nth-child(2) > .form-control').then((inputs) => {
+    cy.get(':nth-child(2) > input').then((inputs) => {
       expect(inputs.length).to.be.equal(1);
       inputs[0].dispatchEvent(pasteEvent);
     });

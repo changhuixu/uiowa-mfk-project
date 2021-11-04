@@ -12,7 +12,7 @@ describe('Split Cost Demos', () => {
       cancelable: true,
     });
 
-    cy.get('#mfk-lines :nth-child(1) > .mfk-container .form-control').then(
+    cy.get('#mfk-lines :nth-child(1) > .mfk-container input').then(
       (inputs) => {
         expect(inputs.length).to.be.equal(10);
         inputs[0].dispatchEvent(pasteEvent);

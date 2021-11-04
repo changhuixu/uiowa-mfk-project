@@ -55,7 +55,7 @@ describe('Basic Demos', () => {
 
   it('default MFK input -- typing numbers should auto jump to next field', () => {
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).type('020-12-1012-01008-00000000-6219-000-00111-12-355545');
     cy.get('#mfk1-string > uiowa-mfk-string')
       .invoke('text')
@@ -64,17 +64,17 @@ describe('Basic Demos', () => {
 
   it('default MFK input -- typing numbers should auto jump to next field -- 2', () => {
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).type('020-12-1012');
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(4) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(4) > input'
     ).should('be.focused');
     cy.get('#mfk1-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-------');
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(3) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(3) > input'
     ).type('{backspace}');
     cy.get('#mfk1-string > uiowa-mfk-string')
       .invoke('text')
@@ -83,15 +83,15 @@ describe('Basic Demos', () => {
 
   it('default MFK input -- typing tabs should auto fill 0s and move to next field', () => {
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     )
       .click()
       .tab();
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).should('have.value', '000');
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(2) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(2) > input'
     )
       .should('be.focused')
       .tab()
@@ -102,7 +102,7 @@ describe('Basic Demos', () => {
       .invoke('text')
       .should('be.equal', '000-00-0000-00000-00000000-----');
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     )
       .should('be.focused')
       .tab()
@@ -111,30 +111,30 @@ describe('Basic Demos', () => {
       .tab()
       .tab();
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(10) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(10) > input'
     ).should('have.value', '0000');
     cy.get('#mfk1-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '000-00-0000-00000-00000000-0000-000-00000-00-0000');
 
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).should('be.focused'); // this is a field in the next demo; the cursor jumps to it due to tabs.
   });
 
   it('default MFK input -- typing combination of numbers and tabs', () => {
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).type('216102015');
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(4) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(4) > input'
     )
       .should('be.focused')
       .tab()
       .tab()
       .type('6128');
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(7) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(7) > input'
     )
       .should('be.focused')
       .tab()
@@ -156,7 +156,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).then((inputs) => {
       inputs[0].dispatchEvent(pasteEvent);
       expect(inputs[0]).to.have.value('260');
@@ -166,7 +166,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(5) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(5) > input'
     ).then((inputs) => {
       inputs[0].dispatchEvent(pasteEvent);
       expect(inputs[0]).to.have.value('26043506');
@@ -189,7 +189,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).then((inputs) => {
       inputs[0].dispatchEvent(pasteEvent);
       expect(inputs[0]).to.have.value('260');
@@ -210,7 +210,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).then((inputs) => {
       inputs[0].dispatchEvent(pasteEvent);
       expect(inputs[0]).to.have.value('260');
@@ -225,7 +225,7 @@ describe('Basic Demos', () => {
     const dt = new DataTransfer();
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).then((inputs) => {
       dt.setData('text/plain', '2604350644010000000000602652020100000000');
       const pasteEvent = new ClipboardEvent('paste', {
@@ -246,7 +246,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#default > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#default > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     ).then((inputs) => {
       dt.setData('text/plain', '2604350644010000000000602652020100000001');
       const pasteEvent = new ClipboardEvent('paste', {
@@ -268,7 +268,7 @@ describe('Basic Demos', () => {
 
   it('MFK input with a readonly field -- initial state', () => {
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     )
       .should('have.value', 'xxxx')
       .should('have.attr', 'readonly');
@@ -279,13 +279,13 @@ describe('Basic Demos', () => {
 
   it('MFK input with a readonly field -- typing numbers - should skip the readonly field', () => {
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).type('2604350644010000000000');
     cy.get('#mfk2-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '260-43-5064-40100-00000000-xxxx----');
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(7) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(7) > input'
     )
       .should('be.focused')
       .type('520-20100-00-0000');
@@ -296,7 +296,7 @@ describe('Basic Demos', () => {
 
   it('MFK input with a readonly field -- typing tabs - should focus the readonly field but not setting value', () => {
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     )
       .click()
       .tab()
@@ -308,7 +308,7 @@ describe('Basic Demos', () => {
       .invoke('text')
       .should('be.equal', '000-00-0000-00000-00000000-xxxx----');
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     )
       .should('be.focused')
       .tab()
@@ -317,14 +317,14 @@ describe('Basic Demos', () => {
       .tab()
       .tab();
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(10) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(10) > input'
     ).should('have.value', '0000');
     cy.get('#mfk2-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '000-00-0000-00000-00000000-xxxx-000-00000-00-0000');
 
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).should('be.focused'); // this is a field in the next demo; the cursor jumps to it due to tabs.
   });
 
@@ -338,7 +338,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).then((inputs) => {
       inputs[0].dispatchEvent(pasteEvent);
       expect(inputs[0]).to.have.value('260');
@@ -353,7 +353,7 @@ describe('Basic Demos', () => {
 
   it('MFK input with a default value field -- initial state', () => {
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     )
       .should('have.value', '6128')
       .should('not.have.attr', 'readonly');
@@ -364,13 +364,13 @@ describe('Basic Demos', () => {
 
   it('MFK input with a default value field -- typing', () => {
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).type('2604350644010000000000');
     cy.get('#mfk3-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '260-43-5064-40100-00000000-6128----');
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     )
       .should('be.focused')
       .type('5520-20100-00-0000');
@@ -381,13 +381,13 @@ describe('Basic Demos', () => {
 
   it('MFK input with a default value field -- typing can change the default value', () => {
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).type('2604350644010000000000{backspace}');
     cy.get('#mfk3-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '260-43-5064-40100-00000000-612----');
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     )
       .should('be.focused')
       .type('5520-20100-00-0000');
@@ -406,7 +406,7 @@ describe('Basic Demos', () => {
     });
 
     cy.get(
-      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > .form-control'
+      '#default-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
     ).then((inputs) => {
       inputs[0].dispatchEvent(pasteEvent);
       expect(inputs[0]).to.have.value('260');

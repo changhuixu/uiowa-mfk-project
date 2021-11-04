@@ -12,7 +12,7 @@ describe('Favorite MFK Demos', () => {
       cancelable: true,
     });
 
-    cy.get('#favorite-mfk-group :nth-child(2) > .form-control').then(
+    cy.get('#favorite-mfk-group :nth-child(2) > input').then(
       (inputs) => {
         expect(inputs.length).to.be.equal(1);
         inputs[0].dispatchEvent(pasteEvent);
@@ -41,11 +41,11 @@ describe('Favorite MFK Demos', () => {
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
-    cy.get('#favorite-mfk-group :nth-child(6) > .form-control').should(
+    cy.get('#favorite-mfk-group :nth-child(6) > input').should(
       'have.value',
       '6219'
     );
-    cy.get('#favorite-mfk-group :nth-child(10) > .form-control').should(
+    cy.get('#favorite-mfk-group :nth-child(10) > input').should(
       'have.value',
       '3555'
     );
@@ -71,7 +71,7 @@ describe('Favorite MFK Demos', () => {
       cancelable: true,
     });
 
-    cy.get('#favorite-mfk-group :nth-child(2) > .form-control').then(
+    cy.get('#favorite-mfk-group :nth-child(2) > input').then(
       (inputs) => {
         expect(inputs.length).to.be.equal(1);
         inputs[0].dispatchEvent(pasteEvent);
@@ -119,18 +119,18 @@ describe('Favorite MFK Demos', () => {
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
-    cy.get(':nth-child(3) > .form-control').type('{backspace}');
+    cy.get(':nth-child(3) > input').type('{backspace}');
     cy.get('[type="button"] svg').should('not.have.class', 'active');
-    cy.get(':nth-child(3) > .form-control').type('2');
+    cy.get(':nth-child(3) > input').type('2');
     cy.get('[type="button"] svg').should('have.class', 'active');
 
-    cy.get(':nth-child(3) > .form-control').type('{backspace}2');
+    cy.get(':nth-child(3) > input').type('{backspace}2');
     cy.get('[type="button"] svg').should('have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
-    cy.get(':nth-child(4) > .form-control').type('{backspace}8');
+    cy.get(':nth-child(4) > input').type('{backspace}8');
     cy.get('[type="button"] svg').should('not.have.class', 'active');
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
