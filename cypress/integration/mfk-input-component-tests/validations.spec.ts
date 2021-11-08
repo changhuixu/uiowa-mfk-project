@@ -3,7 +3,7 @@ describe('MFK Validations', () => {
     cy.visit('mfk-validations');
   });
 
-  it('should response invalid for an invalid MFK', () => {
+  it.skip('should response valid for a valid MFK', () => {
     cy.get('button#set-value-btn').click();
 
     cy.get('#mfk1-string > uiowa-mfk-string')
@@ -25,7 +25,7 @@ describe('MFK Validations', () => {
     });
   });
 
-  it('should response invalid for an invalid MFK', () => {
+  it.skip('should response invalid for an invalid MFK', () => {
     const dt = new DataTransfer();
     dt.setData('text/plain', '0201210120100100000000621900000111123555');
     const pasteEvent = new ClipboardEvent('paste', {

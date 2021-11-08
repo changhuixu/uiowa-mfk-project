@@ -418,4 +418,40 @@ describe('Basic Demos', () => {
         );
     });
   });
+
+  it('MFK input with a readonly field -- typing backspace - should skip the readonly field', () => {
+    cy.get(
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(1) > input'
+    ).type('2604350644010000000000520-20100-00-0000');
+    cy.get('#mfk2-string > uiowa-mfk-string')
+      .invoke('text')
+      .should('be.equal', '260-43-5064-40100-00000000-xxxx-520-20100-00-0000');
+    cy.get(
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(10) > input'
+    )
+      .type('{backspace}{backspace}{backspace}{backspace}')
+      .should('be.focused');
+    cy.get(
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(10) > input'
+    )
+      .type('{backspace}')
+      .should('not.be.focused');
+    cy.get('#mfk2-string > uiowa-mfk-string')
+      .invoke('text')
+      .should('be.equal', '260-43-5064-40100-00000000-xxxx-520-20100-0-');
+    cy.get(
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(9) > input'
+    ).should('be.focused');
+    cy.get(
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(7) > input'
+    )
+      .type('{backspace}{backspace}{backspace}{backspace}')
+      .should('not.be.focused');
+    cy.get(
+      '#readonly-field > uiowa-mfk-input > .mfk-container > :nth-child(5) > input'
+    ).should('be.focused');
+    cy.get('#mfk2-string > uiowa-mfk-string')
+      .invoke('text')
+      .should('be.equal', '260-43-5064-40100-0000000-xxxx--20100-0-');
+  });
 });

@@ -99,7 +99,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
     const target = e.target as HTMLInputElement;
     const fieldName = target.name as keyof Mfk;
     if (this.mfk[fieldName]?.length === target.maxLength) {
-      // auto jump to next input field when current field is full
+      // auto jump to the next input field when current field is full
       const currentInputFieldIndex = this.options.findIndex(
         (o) => o.name === fieldName
       );
@@ -117,20 +117,40 @@ export class MfkInputComponent implements OnInit, OnChanges {
   }
 
   onKeydown(e: KeyboardEvent) {
+    const target = e.target as HTMLInputElement;
+    const fieldName = target.name as keyof Mfk;
+
     // handle "tab" key --> auto fill '0's if the input field has not completed
-    if (e.key !== 'Tab') {
-      return;
+    if (e.key === 'Tab') {
+      if (target.readOnly) {
+        return;
+      }
+      while (this.mfk[fieldName]!.length < target.maxLength) {
+        this.mfk[fieldName] = this.mfk[fieldName]!.concat('0');
+      }
+      this.mfkChange.emit(this.mfk);
     }
 
-    const target = e.target as HTMLInputElement;
-    if (target.readOnly) {
-      return;
+    // handle "backspace" key
+    if (
+      (e.key === 'Backspace' || e.code === 'Backspace') &&
+      this.mfk[fieldName]?.length === 0
+    ) {
+      const currentInputFieldIndex = this.options.findIndex(
+        (o) => o.name === fieldName
+      );
+      // auto jump to the previous input field when current field is empty
+      for (let i = currentInputFieldIndex - 1; i >= 0; i--) {
+        if (this.options[i].readonly) {
+          continue;
+        }
+        const prevInputField = this.mfkInputFields.find(
+          (v) => v.el.nativeElement['name'] === this.options[i].name
+        );
+        prevInputField?.el.nativeElement.focus();
+        break;
+      }
     }
-    const fieldName = target.name as keyof Mfk;
-    while (this.mfk[fieldName]!.length < target.maxLength) {
-      this.mfk[fieldName] = this.mfk[fieldName]!.concat('0');
-    }
-    this.mfkChange.emit(this.mfk);
   }
 
   private mergeOptions(options: MfkFieldOption[] = []): MfkFieldOption[] {
