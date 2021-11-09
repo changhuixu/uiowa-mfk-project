@@ -2,19 +2,19 @@
 <hr />
 
 <section id="multiple-mfks-group" class="flex flex-column">
-  <div class="font-weight-bold">MFK(s)</div>
+  <div class="fw-bold">MFK(s)</div>
   <div id="mfk-lines">
     <div
       *ngFor="let item of accounts"
       class="d-flex align-items-end justify-content-between mfk-line"
     >
       <uiowa-mfk-input [(mfk)]="item.mfk"></uiowa-mfk-input>
-      <div class="percentage-field ml-auto">
+      <div class="percentage-field ms-auto">
         <p class="percentage-label">Percentage</p>
         <div class="input-group" style="max-width: 4.25rem; min-width: 4.25rem">
           <input
             type="text"
-            class="form-control text-right"
+            class="form-control text-end"
             style="padding: 0.375rem"
             aria-label="percentage"
             digitOnly
@@ -49,11 +49,11 @@
       Add an MFK
     </button>
     <div>
-      <span class="font-weight-bold"> Total:</span>
+      <span class="fw-bold"> Total:</span>
       <div
-        class="d-inline-block text-right"
+        class="d-inline-block text-end"
         style="width: 4.25rem; margin-right: 3rem"
-        [ngClass]="{ 'text-danger font-weight-bold': total != 100 }"
+        [ngClass]="{ 'text-danger fw-bold': total != 100 }"
       >
         <span style="padding: 0.375rem">{{ total }}</span>
         <span style="padding: 0.375rem">%</span>
@@ -98,7 +98,7 @@
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-outline-dark mr-2"
+      class="btn btn-outline-dark me-2"
       (click)="modal.close()"
     >
       No. I changed my mind.

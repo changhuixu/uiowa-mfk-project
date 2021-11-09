@@ -21,16 +21,16 @@
 
 <section id="configurable-options">
   <p class="h2">MFK input with configurable options</p>
-  <div class="form-inline mb-2">
-    <div class="mr-sm-2">
-      <select class="custom-select" [(ngModel)]="field" name="field">
+  <div class="d-flex align-items-center mb-2">
+    <div class="me-2">
+      <select class="form-select" [(ngModel)]="field" name="field">
         <option value="">Select an MFK field</option>
         <option *ngFor="let item of mfkFields" [ngValue]="item">
           {{ item }}
         </option>
       </select>
     </div>
-    <div class="mr-sm-2">
+    <div class="me-2">
       <input
         type="text"
         class="form-control"
@@ -38,28 +38,28 @@
         placeholder="default value"
       />
     </div>
-    <div class="mr-sm-2">
-      <div class="custom-control custom-checkbox">
+    <div class="me-2">
+      <div class="form-check">
         <input
           type="checkbox"
-          class="custom-control-input"
+          class="form-check-input"
           id="reonly"
           [(ngModel)]="isReadonly"
         />
-        <label class="custom-control-label" id="checkbox-readonly" for="reonly">
+        <label class="form-check-label" id="checkbox-readonly" for="reonly">
           ReadOnly?
         </label>
       </div>
     </div>
-    <div class="mr-sm-2">
-      <div class="custom-control custom-checkbox">
+    <div class="me-2">
+      <div class="form-check">
         <input
           type="checkbox"
-          class="custom-control-input"
+          class="form-check-input"
           id="brf"
           [(ngModel)]="withBrf"
         />
-        <label class="custom-control-label" id="checkbox-brf" for="brf">
+        <label class="form-check-label" id="checkbox-brf" for="brf">
           With BRF?
         </label>
       </div>
@@ -69,7 +69,7 @@
     <button
       id="set-option2-btn"
       type="button"
-      class="btn btn-primary mr-2"
+      class="btn btn-primary me-2"
       (click)="setOptions2()"
     >
       Set

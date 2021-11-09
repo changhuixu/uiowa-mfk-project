@@ -4,6 +4,7 @@ import {
   Mfk,
   MfkString,
   stringify,
+  validateStructure,
 } from 'projects/uiowa/uiowa-mfk/src/public-api';
 import { emptyMfk } from '@uiowa/uiowa-mfk';
 
@@ -24,6 +25,7 @@ interface MfkValidationResult {
 })
 export class MfkValidationsComponent implements OnInit {
   mfk1: Mfk = emptyMfk();
+  mfkStructureErrors: string[] = [];
   validationResult: MfkValidationResult = {
     statusCode: 0,
     statusMessage: '',
@@ -40,10 +42,11 @@ export class MfkValidationsComponent implements OnInit {
   }
 
   validateMfk1() {
-    const mfk40String = stringify(this.mfk1).replace(/-/g, '');
-    if (mfk40String.length !== 40) {
+    this.mfkStructureErrors = validateStructure(this.mfk1);
+    if (this.mfkStructureErrors.length) {
       return;
     }
+    const mfk40String = stringify(this.mfk1).replace(/-/g, '');
     const url = `https://apps.its.uiowa.edu/mfk/api-singleDesc.jsp?mfk=10%20%20%20${mfk40String}`;
     return this.httpClient.get(url, { responseType: 'text' }).subscribe((x) => {
       const parts = x.split(/\n/);

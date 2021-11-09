@@ -67,3 +67,46 @@ export function validFormat(mfk: Mfk): boolean {
   }
   return true;
 }
+
+/**
+ * checks if each field of an Mfk object is in a valid format
+ * returns an array of error messages
+ * If the format is valid, then the returning array is empty.
+ */
+export function validateStructure(mfk: Mfk): string[] {
+  const result: string[] = [];
+  if (mfk.fund?.length !== 3) {
+    result.push(`Invalid Fund: Length is incorrect (must be 3 digits)`);
+  }
+  if (mfk.org?.length !== 2) {
+    result.push(`Invalid Org: Length is incorrect (must be 2 digits)`);
+  }
+  if (mfk.dept?.length !== 4) {
+    result.push(`Invalid Dept: Length is incorrect (must be 4 digits)`);
+  }
+  if (mfk.subdept?.length !== 5) {
+    result.push(`Invalid Subdept: Length is incorrect (must be 5 digits)`);
+  }
+  if (mfk.grantpgm?.length !== 8) {
+    result.push(`Invalid Grant/Pgm: Length is incorrect (must be 8 digits)`);
+  }
+  if (mfk.iact?.length !== 4) {
+    result.push(`Invalid Iact: Length is incorrect (must be 4 digits)`);
+  }
+  if (mfk.oact?.length !== 3) {
+    result.push(`Invalid Oact: Length is incorrect (must be 3 digits)`);
+  }
+  if (mfk.dact?.length !== 5) {
+    result.push(`Invalid Dact: Length is incorrect (must be 5 digits)`);
+  }
+  if (mfk.fn?.length !== 2) {
+    result.push(`Invalid Fn: Length is incorrect (must be 2 digits)`);
+  }
+  if (mfk.cctr?.length !== 4) {
+    result.push(`Invalid Cctr: Length is incorrect (must be 4 digits)`);
+  }
+  if (mfk.brf && mfk.brf.length !== 2) {
+    result.push(`Invalid Brf: Length is incorrect (must be 2 digits)`);
+  }
+  return result;
+}

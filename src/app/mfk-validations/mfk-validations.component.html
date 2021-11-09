@@ -4,7 +4,7 @@
     <label
       for="mfk-container_mfk1"
       style="width: 100px"
-      class="font-weight-bold justify-content-start"
+      class="fw-bold justify-content-start"
     >
       MFK
     </label>
@@ -19,7 +19,7 @@
     <button
       id="set-value-btn"
       type="button"
-      class="btn btn-secondary mr-2"
+      class="btn btn-secondary me-2"
       (click)="updateMfk1()"
     >
       Set an MFK Value
@@ -33,6 +33,9 @@
     >
       Validate
     </button>
+  </div>
+  <div class="text-danger">
+    <p *ngFor="let e of mfkStructureErrors" class="m-0">{{ e }}</p>
   </div>
   <div *ngIf="validationResult">
     <pre>{{ validationResult | json }}</pre>
