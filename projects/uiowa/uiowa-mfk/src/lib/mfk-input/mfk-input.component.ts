@@ -63,12 +63,12 @@ export class MfkInputComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mfk && changes.mfk.currentValue) {
-      this.mfk = changes.mfk.currentValue;
+    if (changes['mfk'] && changes['mfk'].currentValue) {
+      this.mfk = changes['mfk'].currentValue;
       this.mfkChange.emit(this.mfk);
     }
-    if (changes.options || !this.options.length) {
-      this.options = this.mergeOptions(changes.options?.currentValue);
+    if (changes['options'] || !this.options.length) {
+      this.options = this.mergeOptions(changes['options']?.currentValue);
       this.mfk = this.mfk;
     }
   }

@@ -1,10 +1,11 @@
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  border: 1px solid #efe3ff;
+  background-color: #fcfaff;
 }
 
 .tab a {
+  color: #0049b5 !important;
   background-color: inherit;
   float: left;
   border: none;
@@ -16,10 +17,7 @@
   text-decoration: none;
 }
 
-.tab a:hover {
-  background-color: #ddd;
-}
-
+.tab a:hover,
 .tab a.active {
-  background-color: #ccc;
+  background-color: #f4dcff;
 }
