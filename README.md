@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/changhuixu/uiowa-mfk-project/main.svg?label=Travis%20CI&style=flat-square)](https://travis-ci.com/changhuixu/uiowa-mfk-project)
 [![npm](https://img.shields.io/npm/v/@uiowa/uiowa-mfk.svg?style=flat-square)](https://www.npmjs.com/package/@uiowa/uiowa-mfk)
 
-`uiowa-mfk` is a full-fledged Angular library for MFK input. Based on this library, the demo app shows some common configurations of MFK inputs, validations, and Favorite MFK management. This library has peer dependency on Angular >=12 and @uiowa/digit-only, as of Nov, 2021. The version number of this library is following the major and minor version of Angular.
+`uiowa-mfk` is a full-fledged Angular library for MFK input. Based on this library, the demo app shows some common configurations of MFK inputs, validations, and Favorite MFK management. This library has peer dependency on Angular >=12 and [@uiowa/digit-only](https://github.com/changhuixu/ngx-digit-only), as of Nov, 2021. The version number of this library is following the major and minor version of Angular.
 
 ## [Demo](https://uiowa-mfk.firebaseapp.com)
 
@@ -14,12 +14,20 @@
   1. Number only input fields with fixed lengths.
   1. Smartly handle paste strings for input fields.
   1. Auto fill 0s in the MFK input field when hit <kbd>Tab</kbd> key.
+  1. Auto jump to the previous field in the MFK input component when hit <kbd>Backspace</kbd> key.
   1. Auto focus next fields when current MFK input field is full.
   1. Allow set field(s) default value(s).
   1. Allow set readonly field(s).
   1. Provide MFK common methods.
   1. Provide MFK validation method and service.
   1. Provide MFK change event API.
+
+- `uiowa-mfk-string`
+
+  1. Show MFK string in a `<span>` tag.
+  1. Auto detect BRF field in the string.
+
+## Other possible features
 
 - `uiowa-favorite-mfk`
 
@@ -31,7 +39,8 @@
   1. Provide Favorite MFK crud service.
   1. Provide Favorite MFKs change event API.
 
-- `uiowa-mfk-string`
+- `split-cost`
 
-  1. Show MFK string in a `<span>` tag.
-  1. Auto detect BRF field in the string.
+  1. Allow to add one or more MFKs and set their percentages.
+  1. Allow to edit/delete MFKs and their percentages.
+  1. Check if the total percentage is 100%.
