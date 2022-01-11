@@ -1,6 +1,6 @@
 # UIowa Mfk
 
-[![Build Status](https://img.shields.io/travis/changhuixu/uiowa-mfk-project/main.svg?label=Travis%20CI&style=flat-square)](https://travis-ci.com/changhuixu/uiowa-mfk-project)
+[![Build Status](https://img.shields.io/travis/changhuixu/uiowa-mfk-project/main.svg?label=Travis%20CI&style=flat-square)](https://app.travis-ci.com/changhuixu/uiowa-mfk-project.svg?branch=main)
 [![npm](https://img.shields.io/npm/v/@uiowa/uiowa-mfk.svg?style=flat-square)](https://www.npmjs.com/package/@uiowa/uiowa-mfk)
 
 `uiowa-mfk` is a full-fledged Angular library for MFK input. Based on this library, the demo app shows some common configurations of MFK inputs, validations, and Favorite MFK management. This library has peer dependency on Angular >=12 and [@uiowa/digit-only](https://github.com/changhuixu/ngx-digit-only), as of Nov, 2021. The version number of this library is following the major and minor version of Angular.
