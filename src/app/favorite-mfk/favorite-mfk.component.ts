@@ -21,6 +21,7 @@ export class FavoriteMfkComponent implements OnInit {
 
   favoriteIconTitle: string = '';
   isIconActive = false;
+  showDropdown = false;
   constructor(private readonly svc: FavoriteMfkService) {}
 
   ngOnInit() {
@@ -69,6 +70,7 @@ export class FavoriteMfkComponent implements OnInit {
   onSelect(selectedMfk: FavoriteMfk) {
     this.mfk = selectedMfk.mfk;
     this.isIconActive = this.isInFavorites();
+    this.showDropdown = false;
   }
 
   clear() {
@@ -76,6 +78,8 @@ export class FavoriteMfkComponent implements OnInit {
     this.options
       .filter((o) => o.defaultValue)
       .forEach((o) => (this.mfk[o.name] = o.defaultValue));
+    this.isIconActive = false;
+    this.showDropdown = false;
   }
 
   private isInFavorites(): boolean {

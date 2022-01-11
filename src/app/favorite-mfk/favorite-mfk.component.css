@@ -33,3 +33,11 @@
 .favorite-field button:hover .inactive {
   color: #f0ad4e;
 }
+
+.favorite-dropdown-menu {
+  top: 0;
+  left: 0;
+  will-change: transform;
+  position: absolute;
+  transform: translate(0, 38px);
+}

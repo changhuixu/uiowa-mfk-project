@@ -2,7 +2,11 @@
 <section id="favorite-mfk-group" class="d-inline-flex">
   <div class="favorite-field">
     <p class="favorite-label">Favorite MFK</p>
-    <div class="btn-group">
+    <div
+      class="btn-group"
+      role="toolbar"
+      aria-label="Favorite MFKs Toolbar with button groups"
+    >
       <button
         type="button"
         class="btn btn-light"
@@ -10,7 +14,7 @@
       >
         <span *ngIf="isIconActive; else starOpen">
           <svg
-            aria-lable="Remove this MFK"
+            aria-label="Remove this MFK"
             class="active"
             role="icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,14 +28,16 @@
           </svg>
         </span>
       </button>
-      <div
-        class="btn-group"
-        ngbDropdown
-        role="group"
-        aria-label="favorite mfks"
-      >
-        <button class="btn btn-light" ngbDropdownToggle></button>
-        <div class="dropdown-menu" ngbDropdownMenu>
+      <div class="btn-group dropdown" role="group" aria-label="favorite mfks">
+        <button
+          class="dropdown-toggle btn btn-light"
+          [attr.aria-expanded]="showDropdown"
+          (click)="showDropdown = !showDropdown"
+        ></button>
+        <div
+          class="dropdown-menu"
+          [ngClass]="{ 'show favorite-dropdown-menu ': showDropdown }"
+        >
           <li
             class="dropdown-item"
             style="cursor: pointer"
@@ -41,11 +47,7 @@
             {{ item.alias }}
           </li>
           <li role="separator" class="dropdown-divider"></li>
-          <li
-            class="dropdown-item"
-            style="cursor: pointer"
-            (click)="clear()"
-          >
+          <li class="dropdown-item" style="cursor: pointer" (click)="clear()">
             <a>
               <svg
                 aria-hidden="true"
@@ -74,7 +76,7 @@
 
   <ng-template #starOpen>
     <svg
-      aria-lable="Add to favorite MFKs"
+      aria-label="Add to favorite MFKs"
       class="inactive"
       role="icon"
       xmlns="http://www.w3.org/2000/svg"
