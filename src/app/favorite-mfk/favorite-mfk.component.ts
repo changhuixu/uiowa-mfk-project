@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   areEqual,
   emptyMfk,
@@ -13,6 +13,7 @@ import { FavoriteMfkService } from './services/favorite-mfk.service';
   selector: 'app-favorite-mfk',
   templateUrl: './favorite-mfk.component.html',
   styleUrls: ['./favorite-mfk.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteMfkComponent implements OnInit {
   favoriteMfks: FavoriteMfk[] = [];
@@ -28,8 +29,7 @@ export class FavoriteMfkComponent implements OnInit {
     this.svc.getMyFavoriteMfks().subscribe((x) => (this.favoriteMfks = x));
   }
 
-  onMfkInputChange(inputMfk: Mfk) {
-    this.mfk = inputMfk;
+  onMfkInputChange() {
     this.isIconActive = this.isInFavorites();
   }
 

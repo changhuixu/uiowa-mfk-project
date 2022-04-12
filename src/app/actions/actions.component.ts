@@ -48,6 +48,7 @@ export class ActionsComponent implements OnInit {
       return;
     }
     try {
+      this.options2 = [];
       const opt = new MfkFieldOption(
         this.field,
         this.defaultValue,

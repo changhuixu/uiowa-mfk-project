@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -15,12 +16,13 @@ import { Mfk } from '../models/mfk';
 import { MfkFieldName } from '../models/mfk-field-name';
 import { MfkFieldOption } from '../models/mfk-field-option';
 import { MfkString } from '../models/mfk-string';
-import { emptyMfk } from '../models/mfk-tools';
+import { areEqual, emptyMfk } from '../models/mfk-tools';
 
 @Component({
   selector: 'uiowa-mfk-input',
   templateUrl: './mfk-input.component.html',
   styleUrls: ['./mfk-input.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MfkInputComponent implements OnInit, OnChanges {
   private _mfk: Mfk = emptyMfk();
@@ -64,12 +66,17 @@ export class MfkInputComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mfk'] && changes['mfk'].currentValue) {
-      this.mfk = changes['mfk'].currentValue;
-      this.mfkChange.emit(this.mfk);
+      if (
+        !areEqual(changes['mfk'].previousValue, changes['mfk'].currentValue)
+      ) {
+        this.mfk = changes['mfk'].currentValue;
+        this.mfkChange.emit(this.mfk);
+      }
     }
     if (changes['options'] || !this.options.length) {
       this.options = this.mergeOptions(changes['options']?.currentValue);
       this.mfk = this.mfk;
+      this.mfkChange.emit(this.mfk);
     }
   }
 
