@@ -27,6 +27,8 @@
   1. Show MFK string in a `<span>` tag.
   1. Auto detect BRF field in the string.
 
+- `mfkString` pipe and `whoKeyString` pipe
+
 ## Other possible features
 
 - `uiowa-favorite-mfk`

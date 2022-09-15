@@ -9,7 +9,7 @@
 
 ## Features
 
-- `uiowa-mfk-input`
+- `uiowa-mfk-input` component
 
   1. Number only input fields with fixed lengths.
   1. Smartly handle paste strings for input fields.
@@ -22,10 +22,12 @@
   1. Provide MFK validation method and service.
   1. Provide MFK change event API.
 
-- `uiowa-mfk-string`
+- `uiowa-mfk-string` component
 
   1. Show MFK string in a `<span>` tag.
   1. Auto detect BRF field in the string.
+
+- `mfkString` pipe and `whoKeyString` pipe
 
 ## Other possible features
 

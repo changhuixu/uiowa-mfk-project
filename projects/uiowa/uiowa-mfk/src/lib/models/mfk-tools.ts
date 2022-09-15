@@ -1,5 +1,6 @@
 import { Mfk } from './mfk';
 import { MfkFieldName } from './mfk-field-name';
+import { MfkString } from './mfk-string';
 
 /**
  * checks the equality of two Mfk objects
@@ -109,4 +110,14 @@ export function validateStructure(mfk: Mfk): string[] {
     result.push(`Invalid Brf: Length is incorrect (must be 2 digits)`);
   }
   return result;
+}
+
+/**
+ * Convert a string to an MFK object
+ * @param mfkString MFK string
+ * @returns MFK object
+ */
+export function toMfk(mfkString: string): Mfk {
+  var s = new MfkString(mfkString);
+  return s.mfk;
 }
