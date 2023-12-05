@@ -4,7 +4,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { UiowaMfkModule } from 'projects/uiowa/uiowa-mfk/src/public-api';
+import { UiowaMfkModule } from '../../projects/uiowa/uiowa-mfk/src/public-api';
 
 import { AppComponent } from './app.component';
 import { DemosComponent } from './demos/demos.component';

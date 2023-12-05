@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
+  emptyMfk,
   Mfk,
   MfkString,
   stringify,
   validateStructure,
-} from 'projects/uiowa/uiowa-mfk/src/public-api';
-import { emptyMfk } from '@uiowa/uiowa-mfk';
+} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 interface MfkValidationResult {
   statusCode: number;

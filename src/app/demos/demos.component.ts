@@ -5,7 +5,7 @@ import {
   Mfk,
   emptyMfk,
   toMfk,
-} from 'projects/uiowa/uiowa-mfk/src/public-api';
+} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 @Component({
   selector: 'app-demos',

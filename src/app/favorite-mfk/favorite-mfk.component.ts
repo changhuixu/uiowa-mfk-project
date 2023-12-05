@@ -5,7 +5,7 @@ import {
   Mfk,
   MfkFieldOption,
   stringify,
-} from 'projects/uiowa/uiowa-mfk/src/public-api';
+} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 import { FavoriteMfk } from './models/favorite-mfk';
 import { FavoriteMfkService } from './services/favorite-mfk.service';
 

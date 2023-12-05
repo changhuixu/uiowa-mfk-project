@@ -1,4 +1,4 @@
-import { Mfk } from 'projects/uiowa/uiowa-mfk/src/public-api';
+import { Mfk } from '../../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 export interface FavoriteMfk {
   id: number;

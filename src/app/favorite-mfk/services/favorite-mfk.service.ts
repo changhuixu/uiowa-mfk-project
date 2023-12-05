@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FavoriteMfk } from '../models/favorite-mfk';
 import { Observable, of } from 'rxjs';
-import { Mfk, MfkString } from 'projects/uiowa/uiowa-mfk/src/public-api';
+import { Mfk, MfkString } from '../../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 @Injectable({ providedIn: 'root' })
 export class FavoriteMfkService {

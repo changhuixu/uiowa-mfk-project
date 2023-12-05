@@ -5,7 +5,7 @@ import {
   MfkFieldName,
   MfkFieldOption,
   MfkString,
-} from 'projects/uiowa/uiowa-mfk/src/public-api';
+} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 @Component({
   selector: 'app-actions',

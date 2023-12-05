@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { stringify } from '@uiowa/uiowa-mfk';
 import {
   areEqual,
   emptyMfk,
   Mfk,
+  stringify,
   validFormat,
-} from 'projects/uiowa/uiowa-mfk/src/public-api';
+} from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 interface Account {
   id: number;

@@ -7,13 +7,15 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": false
         },
         "@schematics/angular:class": {
           "skipTests": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": false
         },
         "@schematics/angular:guard": {
           "skipTests": true
@@ -22,7 +24,8 @@
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": false
         },
         "@schematics/angular:resolver": {
           "skipTests": true
@@ -36,22 +39,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/uiowa-mfk-project",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -71,12 +67,9 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -85,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "uiowa-mfk-project:build:production"
+              "buildTarget": "uiowa-mfk-project:build:production"
             },
             "development": {
-              "browserTarget": "uiowa-mfk-project:build:development"
+              "buildTarget": "uiowa-mfk-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "uiowa-mfk-project:build"
+            "buildTarget": "uiowa-mfk-project:build"
           }
         }
       }

@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
       - name: Checkout 🛎️
@@ -26,7 +26,7 @@ jobs:
           npm ci
           npm run build:lib
           npm run build:gh-pages
-          cp ./dist/uiowa-mfk-project/index.html ./dist/uiowa-mfk-project/404.html
+          cp ./dist/uiowa-mfk-project/browser/index.html ./dist/uiowa-mfk-project/browser/404.html
 
       - name: Run e2e tests 🧪
         run: |
@@ -36,4 +36,4 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/uiowa-mfk-project
+          folder: dist/uiowa-mfk-project/browser
