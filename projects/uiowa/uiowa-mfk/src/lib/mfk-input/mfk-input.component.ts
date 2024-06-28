@@ -16,7 +16,7 @@ import { Mfk } from '../models/mfk';
 import { MfkFieldName } from '../models/mfk-field-name';
 import { MfkFieldOption } from '../models/mfk-field-option';
 import { MfkString } from '../models/mfk-string';
-import { areEqual, emptyMfk } from '../models/mfk-tools';
+import { areEqual, emptyMfk, stringify } from '../models/mfk-tools';
 
 @Component({
   selector: 'uiowa-mfk-input',
@@ -90,15 +90,19 @@ export class MfkInputComponent implements OnInit, OnChanges {
     }
     if (pastedInput.length >= 40) {
       const mfkString = new MfkString(pastedInput);
-      if (mfkString.isValidMfk) {
+      if (mfkString.isValidMfk && !areEqual(this.mfk, mfkString.mfk)) {
         this.mfk = mfkString.mfk;
+        this.originalMfk = stringify(this.mfk);
+        this.mfkChange.emit(this.mfk);
       }
     }
-    this.mfkChange.emit(this.mfk);
   }
 
   onKeyup(e: KeyboardEvent) {
-    this.mfkChange.emit(this.mfk);
+    if (this.originalMfk !== stringify(this.mfk)) {
+      this.mfkChange.emit(this.mfk);
+    }
+
     if (isNaN(Number(e.key))) {
       return; // only numbers can trigger auto jump feature.
     }
@@ -123,7 +127,9 @@ export class MfkInputComponent implements OnInit, OnChanges {
     }
   }
 
+  private originalMfk = '';
   onKeydown(e: KeyboardEvent) {
+    this.originalMfk = stringify(this.mfk);
     const target = e.target as HTMLInputElement;
     const fieldName = target.name as keyof Mfk;
 
@@ -135,7 +141,6 @@ export class MfkInputComponent implements OnInit, OnChanges {
       while (this.mfk[fieldName]!.length < target.maxLength) {
         this.mfk[fieldName] = this.mfk[fieldName]!.concat('0');
       }
-      this.mfkChange.emit(this.mfk);
     }
 
     // handle "backspace" key

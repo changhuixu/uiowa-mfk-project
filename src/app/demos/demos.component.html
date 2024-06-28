@@ -36,3 +36,14 @@
     WhoKey string pipe <code>| whoKeyString</code>: {{ mfk5 | whoKeyString }}
   </div>
 </section>
+
+<hr class="my-5" />
+
+<section id="default-output">
+  <p class="h2">Default MFK Input for testing Output</p>
+  <uiowa-mfk-input [mfk]="mfk6" (mfkChange)="log($event)"></uiowa-mfk-input>
+  <div id="outputCount-string">Output Count: {{ outputCount }}</div>
+  <div>Ctrl-V paste an MFK string, should increment the count by 1.</div>
+</section>
+
+<hr class="my-5" />
