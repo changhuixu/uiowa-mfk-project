@@ -1,4 +1,5 @@
-<span *ngIf="mfk">
+@if(mfk){
+<span>
   <span>{{ mfk.fund }}</span>
   <span>-{{ mfk.org }}</span>
   <span>-{{ mfk.dept }}</span>
@@ -9,5 +10,6 @@
   <span>-{{ mfk.dact }}</span>
   <span>-{{ mfk.fn }}</span>
   <span>-{{ mfk.cctr }}</span>
-  <span *ngIf="mfk.brf">-{{ mfk.brf }}</span>
+  @if(mfk.brf){ <span>-{{ mfk.brf }}</span> }
 </span>
+}

@@ -4,6 +4,7 @@ import { stringify } from '../models/mfk-tools';
 
 @Pipe({
   name: 'mfkString',
+  standalone: false,
 })
 export class MfkStringPipePipe implements PipeTransform {
   transform(value: Mfk, ...args: unknown[]): string {

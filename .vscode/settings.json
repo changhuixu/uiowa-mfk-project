@@ -11,5 +11,8 @@
     "packagr",
     "SUBDEPT",
     "uiowa"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
 }

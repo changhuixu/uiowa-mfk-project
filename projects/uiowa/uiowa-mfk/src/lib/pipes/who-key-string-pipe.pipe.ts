@@ -3,6 +3,7 @@ import { Mfk } from '../models/mfk';
 
 @Pipe({
   name: 'whoKeyString',
+  standalone: false,
 })
 export class WhoKeyStringPipePipe implements PipeTransform {
   transform(value: Mfk, ...args: unknown[]): string {

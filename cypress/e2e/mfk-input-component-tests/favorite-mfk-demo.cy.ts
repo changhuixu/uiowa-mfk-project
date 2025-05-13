@@ -1,6 +1,6 @@
 describe('Favorite MFK Demos', () => {
   beforeEach(() => {
-    cy.visit('favorite-mfk');
+    cy.visit('#/favorite-mfk');
   });
 
   it('should display active star when the input MFK is in favorite', () => {
@@ -12,12 +12,10 @@ describe('Favorite MFK Demos', () => {
       cancelable: true,
     });
 
-    cy.get('#favorite-mfk-group :nth-child(2) > input').then(
-      (inputs) => {
-        expect(inputs.length).to.be.equal(1);
-        inputs[0].dispatchEvent(pasteEvent);
-      }
-    );
+    cy.get('#favorite-mfk-group :nth-child(2) > input').then((inputs) => {
+      expect(inputs.length).to.be.equal(1);
+      inputs[0].dispatchEvent(pasteEvent);
+    });
 
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')
@@ -71,12 +69,10 @@ describe('Favorite MFK Demos', () => {
       cancelable: true,
     });
 
-    cy.get('#favorite-mfk-group :nth-child(2) > input').then(
-      (inputs) => {
-        expect(inputs.length).to.be.equal(1);
-        inputs[0].dispatchEvent(pasteEvent);
-      }
-    );
+    cy.get('#favorite-mfk-group :nth-child(2) > input').then((inputs) => {
+      expect(inputs.length).to.be.equal(1);
+      inputs[0].dispatchEvent(pasteEvent);
+    });
 
     cy.get('#mfk-string > uiowa-mfk-string')
       .invoke('text')

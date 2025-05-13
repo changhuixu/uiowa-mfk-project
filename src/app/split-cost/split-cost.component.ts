@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {
-  areEqual,
   emptyMfk,
   Mfk,
   stringify,
@@ -16,6 +15,7 @@ interface Account {
 
 @Component({
   selector: 'app-split-cost',
+  standalone: false,
   templateUrl: './split-cost.component.html',
   styleUrls: ['./split-cost.component.css'],
 })

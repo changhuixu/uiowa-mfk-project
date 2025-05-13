@@ -9,6 +9,7 @@ import {
 
 @Component({
   selector: 'app-actions',
+  standalone: false,
   templateUrl: './actions.component.html',
   styleUrls: ['./actions.component.css'],
 })

@@ -11,6 +11,7 @@ import { FavoriteMfkService } from './services/favorite-mfk.service';
 
 @Component({
   selector: 'app-favorite-mfk',
+  standalone: false,
   templateUrl: './favorite-mfk.component.html',
   styleUrls: ['./favorite-mfk.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

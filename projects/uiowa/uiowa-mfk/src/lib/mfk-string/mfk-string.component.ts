@@ -3,6 +3,7 @@ import { Mfk } from '../models/mfk';
 
 @Component({
   selector: 'uiowa-mfk-string',
+  standalone: false,
   templateUrl: './mfk-string.component.html',
   styleUrls: ['./mfk-string.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

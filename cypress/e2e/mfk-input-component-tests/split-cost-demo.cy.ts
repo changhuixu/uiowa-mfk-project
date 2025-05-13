@@ -1,6 +1,6 @@
 describe('Split Cost Demos', () => {
   beforeEach(() => {
-    cy.visit('split-cost');
+    cy.visit('#/split-cost');
   });
 
   it('should allow save two MFKs', () => {
@@ -12,12 +12,10 @@ describe('Split Cost Demos', () => {
       cancelable: true,
     });
 
-    cy.get('#mfk-lines :nth-child(1) > .mfk-container input').then(
-      (inputs) => {
-        expect(inputs.length).to.be.equal(10);
-        inputs[0].dispatchEvent(pasteEvent);
-      }
-    );
+    cy.get('#mfk-lines :nth-child(1) > .mfk-container input').then((inputs) => {
+      expect(inputs.length).to.be.equal(10);
+      inputs[0].dispatchEvent(pasteEvent);
+    });
 
     cy.get('#saveBtn').click();
     cy.get('.modal-dialog').should('exist');

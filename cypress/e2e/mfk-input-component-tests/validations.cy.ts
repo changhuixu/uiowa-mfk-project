@@ -9,7 +9,7 @@ Invalid MFK - FUND DOES NOT EXIST
 
 describe('MFK Validations', () => {
   beforeEach(() => {
-    cy.visit('mfk-validations');
+    cy.visit('#/mfk-validations');
   });
 
   it('should response valid for a valid MFK', () => {
@@ -49,13 +49,9 @@ describe('MFK Validations', () => {
     cy.get(':nth-child(2) > input').then((inputs) => {
       expect(inputs.length).to.be.equal(1);
       inputs[0].dispatchEvent(pasteEvent);
+      expect(inputs[0]).to.have.value('02');
     });
 
-    cy.get('#mfk1-string > uiowa-mfk-string').then(($el) => {
-      expect($el.first().text()).to.be.equal(
-        '020-12-1012-01001-00000000-6219-000-00111-12-3555'
-      );
-    });
     cy.get('#mfk1-string > uiowa-mfk-string')
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');

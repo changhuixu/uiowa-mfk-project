@@ -20,6 +20,7 @@ import { areEqual, emptyMfk, stringify } from '../models/mfk-tools';
 
 @Component({
   selector: 'uiowa-mfk-input',
+  standalone: false,
   templateUrl: './mfk-input.component.html',
   styleUrls: ['./mfk-input.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

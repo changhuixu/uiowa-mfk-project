@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DigitOnlyModule } from '@uiowa/digit-only';
+import { DigitOnlyDirective } from '@uiowa/digit-only';
 
 import { MfkInputComponent } from './mfk-input/mfk-input.component';
 import { MfkStringComponent } from './mfk-string/mfk-string.component';
@@ -15,12 +15,13 @@ import { WhoKeyStringPipePipe } from './pipes/who-key-string-pipe.pipe';
     MfkStringPipePipe,
     WhoKeyStringPipePipe,
   ],
-  imports: [CommonModule, FormsModule, DigitOnlyModule],
+  imports: [CommonModule, FormsModule, DigitOnlyDirective],
   exports: [
     MfkInputComponent,
     MfkStringComponent,
     MfkStringPipePipe,
     WhoKeyStringPipePipe,
+    DigitOnlyDirective,
   ],
 })
 export class UiowaMfkModule {}

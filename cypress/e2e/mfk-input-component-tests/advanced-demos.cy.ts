@@ -1,6 +1,6 @@
 describe('Advanced Demos', () => {
   beforeEach(() => {
-    cy.visit('actions');
+    cy.visit('#/actions');
   });
 
   it('should preserve the readonly field in an MFK input', () => {

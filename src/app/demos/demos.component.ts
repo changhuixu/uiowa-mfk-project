@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  MfkFieldOption,
-  MfkFieldName,
   Mfk,
+  MfkFieldName,
+  MfkFieldOption,
   emptyMfk,
   toMfk,
 } from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 @Component({
   selector: 'app-demos',
+  standalone: false,
   templateUrl: './demos.component.html',
   styleUrls: ['./demos.component.css'],
 })

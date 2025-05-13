@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import {
   emptyMfk,
   Mfk,
@@ -20,6 +20,7 @@ interface MfkValidationResult {
 
 @Component({
   selector: 'app-mfk-validations',
+  standalone: false,
   templateUrl: './mfk-validations.component.html',
   styleUrls: ['./mfk-validations.component.css'],
 })
