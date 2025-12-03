@@ -11,21 +11,21 @@ import {
   SimpleChanges,
   ViewChildren,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DigitOnlyDirective } from '@uiowa/digit-only';
 import { Mfk } from '../models/mfk';
 import { MfkFieldName } from '../models/mfk-field-name';
 import { MfkFieldOption } from '../models/mfk-field-option';
-import { MfkString } from '../models/mfk-string';
-import { areEqual, emptyMfk, stringify } from '../models/mfk-tools';
+import { areEqual, emptyMfk, stringify, toMfk, validFormat } from '../models/mfk-tools';
 
 @Component({
   selector: 'uiowa-mfk-input',
-  standalone: false,
-  templateUrl: './mfk-input.component.html',
-  styleUrls: ['./mfk-input.component.css'],
+  imports: [DigitOnlyDirective, FormsModule],
+  templateUrl: './mfk-input.html',
+  styleUrl: './mfk-input.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MfkInputComponent implements OnInit, OnChanges {
+export class MfkInput implements OnInit, OnChanges {
   private _mfk: Mfk = emptyMfk();
   @Input()
   set mfk(mfk: Mfk) {
@@ -56,20 +56,14 @@ export class MfkInputComponent implements OnInit, OnChanges {
   constructor(el: ElementRef) {
     const rand = Math.random().toString(36).substring(2);
     this.elementId +=
-      el.nativeElement.getAttribute('id') ||
-      el.nativeElement.getAttribute('name') ||
-      rand;
+      el.nativeElement.getAttribute('id') || el.nativeElement.getAttribute('name') || rand;
     this.elementName +=
-      el.nativeElement.getAttribute('name') ||
-      el.nativeElement.getAttribute('id') ||
-      rand;
+      el.nativeElement.getAttribute('name') || el.nativeElement.getAttribute('id') || rand;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mfk'] && changes['mfk'].currentValue) {
-      if (
-        !areEqual(changes['mfk'].previousValue, changes['mfk'].currentValue)
-      ) {
+      if (!areEqual(changes['mfk'].previousValue, changes['mfk'].currentValue)) {
         this.mfk = changes['mfk'].currentValue;
         this.mfkChange.emit(this.mfk);
       }
@@ -84,15 +78,14 @@ export class MfkInputComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   paste(e: ClipboardEvent) {
-    const pastedInput: string =
-      e.clipboardData?.getData('text/plain').replace(/\D/g, '') ?? ''; // get a digit-only string
+    const pastedInput: string = e.clipboardData?.getData('text/plain').replace(/\D/g, '') ?? ''; // get a digit-only string
     if (!pastedInput) {
       return;
     }
     if (pastedInput.length >= 40) {
-      const mfkString = new MfkString(pastedInput);
-      if (mfkString.isValidMfk && !areEqual(this.mfk, mfkString.mfk)) {
-        this.mfk = mfkString.mfk;
+      const mfk_temp = toMfk(pastedInput);
+      if (validFormat(mfk_temp) && !areEqual(this.mfk, mfk_temp)) {
+        this.mfk = mfk_temp;
         this.originalMfk = stringify(this.mfk);
         this.mfkChange.emit(this.mfk);
       }
@@ -112,9 +105,7 @@ export class MfkInputComponent implements OnInit, OnChanges {
     const fieldName = target.name as keyof Mfk;
     if (this.mfk[fieldName]?.length === target.maxLength) {
       // auto jump to the next input field when current field is full
-      const currentInputFieldIndex = this.options.findIndex(
-        (o) => o.name === fieldName
-      );
+      const currentInputFieldIndex = this.options.findIndex((o) => o.name === fieldName);
       for (let i = currentInputFieldIndex + 1; i < this.options.length; i++) {
         if (this.options[i].readonly) {
           continue;
@@ -145,13 +136,8 @@ export class MfkInputComponent implements OnInit, OnChanges {
     }
 
     // handle "backspace" key
-    if (
-      (e.key === 'Backspace' || e.code === 'Backspace') &&
-      this.mfk[fieldName]?.length === 0
-    ) {
-      const currentInputFieldIndex = this.options.findIndex(
-        (o) => o.name === fieldName
-      );
+    if ((e.key === 'Backspace' || e.code === 'Backspace') && this.mfk[fieldName]?.length === 0) {
+      const currentInputFieldIndex = this.options.findIndex((o) => o.name === fieldName);
       // auto jump to the previous input field when current field is empty
       for (let i = currentInputFieldIndex - 1; i >= 0; i--) {
         if (this.options[i].readonly) {

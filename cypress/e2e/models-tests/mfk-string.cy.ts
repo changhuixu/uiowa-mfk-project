@@ -1,15 +1,18 @@
 import { Mfk } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk';
-import { MfkString } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-string';
-import { areEqual } from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-tools';
+import {
+  areEqual,
+  toMfk,
+  validFormat,
+} from '../../../projects/uiowa/uiowa-mfk/src/lib/models/mfk-tools';
 
 describe('Unit Test MfkString class', () => {
   before(() => {
-    expect(MfkString, 'MfkString').to.be.a('function');
+    expect(toMfk, 'toMfk').to.be.a('function');
   });
 
   context('parse string to Mfk', () => {
     it('should correctly parse a valid Mfk string -- 1', () => {
-      const s1 = new MfkString('02012101201001000000006219000001111235555');
+      const s1 = toMfk('02012101201001000000006219000001111235555');
       const m1: Mfk = {
         fund: '020',
         org: '12',
@@ -22,12 +25,12 @@ describe('Unit Test MfkString class', () => {
         fn: '12',
         cctr: '3555',
       } as Mfk;
-      expect(s1.isValidMfk).to.be.true;
-      expect(areEqual(s1.mfk, m1)).to.be.true;
+      expect(validFormat(s1)).to.be.true;
+      expect(areEqual(s1, m1)).to.be.true;
     });
 
     it('should correctly parse a valid Mfk string -- 2', () => {
-      const s1 = new MfkString('0201210120100100000000621900000111123555');
+      const s1 = toMfk('0201210120100100000000621900000111123555');
       const m1: Mfk = {
         fund: '020',
         org: '12',
@@ -40,15 +43,15 @@ describe('Unit Test MfkString class', () => {
         fn: '12',
         cctr: '3555',
       } as Mfk;
-      expect(s1.isValidMfk).to.be.true;
-      expect(areEqual(s1.mfk, m1)).to.be.true;
-      expect(s1.mfk).to.deep.equal(m1);
+      expect(validFormat(s1)).to.be.true;
+      expect(areEqual(s1, m1)).to.be.true;
+      expect(s1).to.deep.equal(m1);
     });
 
     it('should correctly parse an invalid Mfk string', () => {
-      const s1 = new MfkString('020121012000100000000621900000111123555');
-      expect(s1.isValidMfk).to.be.false;
-      expect(s1.mfk).to.deep.equal({});
+      const s1 = toMfk('020121012000100000000621900000111123555');
+      expect(validFormat(s1)).to.be.false;
+      expect(s1).to.deep.equal({});
     });
   });
 });

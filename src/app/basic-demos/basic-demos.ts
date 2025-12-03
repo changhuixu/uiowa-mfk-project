@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
+  emptyMfk,
   Mfk,
   MfkFieldName,
   MfkFieldOption,
-  emptyMfk,
+  MfkInput,
+  MfkString,
+  MfkStringPipe,
   toMfk,
+  WhoKeyStringPipe,
 } from '../../../projects/uiowa/uiowa-mfk/src/public-api';
 
 @Component({
-  selector: 'app-demos',
-  standalone: false,
-  templateUrl: './demos.component.html',
-  styleUrls: ['./demos.component.css'],
+  selector: 'app-basic-demos',
+  imports: [MfkInput, MfkString, MfkStringPipe, WhoKeyStringPipe, FormsModule],
+  templateUrl: './basic-demos.html',
+  styleUrl: './basic-demos.css',
 })
-export class DemosComponent implements OnInit {
+export class BasicDemos {
   mfk1: Mfk = emptyMfk();
   mfk2: Mfk = emptyMfk();
   options2 = [new MfkFieldOption(MfkFieldName.IACT, 'xxxx', true)];
@@ -23,9 +28,6 @@ export class DemosComponent implements OnInit {
   mfk5 = toMfk('2604350644010000000000602652020100000000');
   mfk6 = toMfk('5104350644010000000000602652020100000000');
   outputCount = 0;
-
-  constructor() {}
-  ngOnInit(): void {}
 
   log(mfk: Mfk) {
     this.outputCount++;

@@ -1,0 +1,26 @@
+<form id="{{ elementId }}" name="{{ elementName }}" [attr.name]="elementName" class="mfk-container">
+  @for (op of options; track $index) {
+  <div class="mfk-field">
+    <label for="{{ elementId + op.name }}">
+      {{ op.label }}
+    </label>
+    <input
+      type="text"
+      id="{{ elementId + op.name }}"
+      name="{{ op.name }}"
+      [attr.name]="op.name"
+      [style.width.rem]="op.width"
+      [attr.aria-label]="op.name"
+      [attr.maxlength]="op.length"
+      [readOnly]="op.readonly"
+      [(ngModel)]="mfk[op.name]"
+      (paste)="paste($event)"
+      (keyup)="onKeyup($event)"
+      (keydown)="onKeydown($event)"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      digitOnly
+    />
+  </div>
+  }
+</form>

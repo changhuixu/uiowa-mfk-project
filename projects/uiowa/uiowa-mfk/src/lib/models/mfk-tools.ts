@@ -1,6 +1,5 @@
 import { Mfk } from './mfk';
 import { MfkFieldName } from './mfk-field-name';
-import { MfkString } from './mfk-string';
 
 /**
  * checks the equality of two Mfk objects
@@ -70,6 +69,14 @@ export function validFormat(mfk: Mfk): boolean {
 }
 
 /**
+ * checks if an Mfk string is in a valid format
+ */
+export function validMfkString(mfkString: string): boolean {
+  const s = mfkString.replace(/\D/g, '');
+  return s.length >= 40;
+}
+
+/**
  * checks if each field of an Mfk object is in a valid format
  * returns an array of error messages
  * If the format is valid, then the returning array is empty.
@@ -118,6 +125,22 @@ export function validateStructure(mfk: Mfk): string[] {
  * @returns MFK object
  */
 export function toMfk(mfkString: string): Mfk {
-  var s = new MfkString(mfkString);
-  return s.mfk;
+  const mfk: Mfk = {} as Mfk;
+  const s = mfkString.replace(/\D/g, '');
+  if (s && s.length >= 40) {
+    mfk.fund = s.substring(0, 3);
+    mfk.org = s.substring(3, 5);
+    mfk.dept = s.substring(5, 9);
+    mfk.subdept = s.substring(9, 14);
+    mfk.grantpgm = s.substring(14, 22);
+    mfk.iact = s.substring(22, 26);
+    mfk.oact = s.substring(26, 29);
+    mfk.dact = s.substring(29, 34);
+    mfk.fn = s.substring(34, 36);
+    mfk.cctr = s.substring(36, 40);
+    if (s.length >= 42) {
+      mfk.brf = s.substring(40, 42);
+    }
+  }
+  return mfk;
 }

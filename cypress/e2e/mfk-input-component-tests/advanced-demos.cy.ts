@@ -1,14 +1,12 @@
 describe('Advanced Demos', () => {
   beforeEach(() => {
-    cy.visit('#/actions');
+    cy.visit('#/advanced-demos');
   });
 
   it('should preserve the readonly field in an MFK input', () => {
     cy.get('button#update-value1-btn').click();
 
-    cy.get(
-      '#update-mfk-value > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
-    )
+    cy.get('#update-mfk-value > uiowa-mfk-input > .mfk-container > :nth-child(6) > input')
       .should('have.value', 'xxxx')
       .should('have.attr', 'readonly');
 
@@ -31,19 +29,13 @@ describe('Advanced Demos', () => {
       expect(json[1].name).to.be.equal('brf');
       expect(json[1].defaultValue).to.be.equal('');
     });
-    cy.get('#mfk2-string > uiowa-mfk-string')
-      .invoke('text')
-      .should('be.equal', '-----6218----');
+    cy.get('#mfk2-string > uiowa-mfk-string').invoke('text').should('be.equal', '-----6218----');
 
-    cy.get(
-      '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
-    )
+    cy.get('#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input')
       .should('have.value', '6218')
       .should('have.attr', 'readonly');
 
-    cy.get(
-      '#configurable-options > uiowa-mfk-input > .mfk-container  input'
-    ).then(($el) => {
+    cy.get('#configurable-options > uiowa-mfk-input > .mfk-container  input').then(($el) => {
       expect($el.length).to.be.equal(11);
     });
   });
@@ -57,12 +49,12 @@ describe('Advanced Demos', () => {
       cancelable: true,
     });
 
-    cy.get(
-      '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(2) > input'
-    ).then((inputs) => {
-      expect(inputs.length).to.be.equal(1);
-      inputs[0].dispatchEvent(pasteEvent);
-    });
+    cy.get('#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(2) > input').then(
+      (inputs) => {
+        expect(inputs.length).to.be.equal(1);
+        inputs[0].dispatchEvent(pasteEvent);
+      }
+    );
     cy.get(
       '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     ).should('have.value', '6219');
@@ -80,9 +72,7 @@ describe('Advanced Demos', () => {
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6219-000-00111-12-3555');
 
-    cy.get(
-      '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
-    )
+    cy.get('#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input')
       .should('have.value', '6219')
       .should('not.have.attr', 'readonly');
   });
@@ -96,12 +86,12 @@ describe('Advanced Demos', () => {
       cancelable: true,
     });
 
-    cy.get(
-      '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(2) > input'
-    ).then((inputs) => {
-      expect(inputs.length).to.be.equal(1);
-      inputs[0].dispatchEvent(pasteEvent);
-    });
+    cy.get('#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(2) > input').then(
+      (inputs) => {
+        expect(inputs.length).to.be.equal(1);
+        inputs[0].dispatchEvent(pasteEvent);
+      }
+    );
     cy.get(
       '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
     ).should('have.value', '6219');
@@ -119,9 +109,7 @@ describe('Advanced Demos', () => {
       .invoke('text')
       .should('be.equal', '020-12-1012-01001-00000000-6218-000-00111-12-3555');
 
-    cy.get(
-      '#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input'
-    )
+    cy.get('#configurable-options > uiowa-mfk-input > .mfk-container > :nth-child(6) > input')
       .should('have.value', '6218')
       .should('have.attr', 'readonly');
   });

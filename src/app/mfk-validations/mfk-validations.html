@@ -1,0 +1,30 @@
+<section id="update-mfk-value">
+  <p class="h2">MFK Validations</p>
+  <div class="form-inline">
+    <label for="mfk-container_mfk1" style="width: 100px" class="fw-bold justify-content-start">
+      MFK
+    </label>
+    <uiowa-mfk-input id="mfk1" [(mfk)]="mfk1" />
+  </div>
+
+  <div id="mfk1-string">
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk1" />
+  </div>
+  <div class="my-2">
+    <button id="set-value-btn" type="button" class="btn btn-secondary me-2" (click)="updateMfk1()">
+      Set an MFK Value
+    </button>
+    <button id="validate-btn" type="button" class="btn btn-primary" (click)="validateMfk1()">
+      Validate
+    </button>
+  </div>
+  <div class="text-danger">
+    @for (e of mfkStructureErrors; track $index) {
+    <div>{{ e }}</div>
+    }
+  </div>
+  <div>
+    <pre>{{ validationResult() | json }}</pre>
+  </div>
+</section>

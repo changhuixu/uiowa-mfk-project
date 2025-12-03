@@ -1,47 +1,36 @@
 <section id="default">
   <p class="h2">Default MFK input</p>
-  <uiowa-mfk-input [(mfk)]="mfk1"></uiowa-mfk-input>
-  <div id="mfk1-string">
-    MFK:
-    <uiowa-mfk-string [mfk]="mfk1"></uiowa-mfk-string>
-  </div>
+  <uiowa-mfk-input [(mfk)]="mfk1" />
+  <div id="mfk1-string">MFK: <uiowa-mfk-string [mfk]="mfk1" /></div>
 </section>
 
 <hr class="my-5" />
 
 <section id="readonly-field">
   <p class="h2">MFK input with a readonly field</p>
-  <uiowa-mfk-input [(mfk)]="mfk2" [options]="options2"></uiowa-mfk-input>
-  <div id="mfk2-string">
-    MFK:
-    <uiowa-mfk-string [mfk]="mfk2"></uiowa-mfk-string>
-  </div>
+  <uiowa-mfk-input [(mfk)]="mfk2" [options]="options2" />
+  <div id="mfk2-string">MFK: <uiowa-mfk-string [mfk]="mfk2" /></div>
 </section>
 
 <hr class="my-5" />
 
 <section id="default-field">
   <p class="h2">MFK input with a default field</p>
-  <uiowa-mfk-input [(mfk)]="mfk3" [options]="options3"></uiowa-mfk-input>
-  <div id="mfk3-string">
-    MFK:
-    <uiowa-mfk-string [mfk]="mfk3"></uiowa-mfk-string>
-  </div>
+  <uiowa-mfk-input [(mfk)]="mfk3" [options]="options3" />
+  <div id="mfk3-string">MFK: <uiowa-mfk-string [mfk]="mfk3" /></div>
 </section>
 <hr class="my-5" />
 
 <section id="pipes">
   <div>MFK string pipe <code>| mfkString</code>: {{ mfk5 | mfkString }}</div>
-  <div>
-    WhoKey string pipe <code>| whoKeyString</code>: {{ mfk5 | whoKeyString }}
-  </div>
+  <div>WhoKey string pipe <code>| whoKeyString</code>: {{ mfk5 | whoKeyString }}</div>
 </section>
 
 <hr class="my-5" />
 
 <section id="default-output">
   <p class="h2">Default MFK Input for testing Output</p>
-  <uiowa-mfk-input [mfk]="mfk6" (mfkChange)="log($event)"></uiowa-mfk-input>
+  <uiowa-mfk-input [mfk]="mfk6" (mfkChange)="log($event)" />
   <div id="outputCount-string">Output Count: {{ outputCount }}</div>
   <div>Ctrl-V paste an MFK string, should increment the count by 1.</div>
 </section>

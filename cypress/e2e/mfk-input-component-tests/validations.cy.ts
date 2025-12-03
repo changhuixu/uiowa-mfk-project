@@ -69,9 +69,7 @@ describe('MFK Validations', () => {
     cy.get('pre').then(($el) => {
       const json = $el[0].textContent || '';
       expect(JSON.parse(json).statusCode).to.be.equal(0);
-      expect(JSON.parse(json).statusMessage).to.be.equal(
-        'Invalid MFK - FUND DOES NOT EXIST'
-      );
+      expect(JSON.parse(json).statusMessage).to.be.equal('Invalid MFK - FUND DOES NOT EXIST');
     });
   });
 });

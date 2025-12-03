@@ -33,7 +33,7 @@
   -moz-appearance: none;
   appearance: none;
   border-radius: 0.25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .mfk-field input:focus {
   color: #212529;
@@ -42,7 +42,8 @@
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
-.mfk-field input:disabled, .mfk-field input[readonly] {
+.mfk-field input:disabled,
+.mfk-field input[readonly] {
   background-color: #e9ecef;
   opacity: 1;
 }

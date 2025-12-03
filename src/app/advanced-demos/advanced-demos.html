@@ -1,0 +1,69 @@
+<section id="update-mfk-value">
+  <p class="h2">MFK input with a readonly field</p>
+  <uiowa-mfk-input [(mfk)]="mfk1" [options]="options1" />
+  <div id="mfk1-string">MFK: <uiowa-mfk-string [mfk]="mfk1" /></div>
+  <div>
+    <button id="update-value1-btn" type="button" class="btn btn-primary" (click)="updateMfk1()">
+      Update
+    </button>
+  </div>
+</section>
+
+<hr class="my-5" />
+
+<section id="configurable-options">
+  <p class="h2">MFK input with configurable options</p>
+  <div class="d-flex align-items-center mb-2">
+    <div class="me-2">
+      <select class="form-select" [(ngModel)]="field" name="field">
+        <option value="" disabled>Select an MFK field</option>
+        @for (item of mfkFields; track $index) {
+        <option [ngValue]="item">{{ item }}</option>
+        }
+      </select>
+    </div>
+    <div class="me-2">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="defaultValue"
+        placeholder="default value"
+      />
+    </div>
+    <div class="me-2">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="reonly" [(ngModel)]="isReadonly" />
+        <label class="form-check-label" id="checkbox-readonly" for="reonly"> ReadOnly? </label>
+      </div>
+    </div>
+    <div class="me-2">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="brf" [(ngModel)]="withBrf" />
+        <label class="form-check-label" id="checkbox-brf" for="brf"> With BRF? </label>
+      </div>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button id="set-option2-btn" type="button" class="btn btn-primary me-2" (click)="setOptions2()">
+      Set
+    </button>
+    <button
+      id="reset-option2-btn"
+      type="button"
+      class="btn btn-secondary"
+      (click)="resetOptions2()"
+    >
+      Reset
+    </button>
+  </div>
+  <uiowa-mfk-input [(mfk)]="mfk2" [options]="options2" />
+  <div id="mfk2-string">
+    MFK:
+    <uiowa-mfk-string [mfk]="mfk2" />
+  </div>
+  <div>
+    <pre>{{ options2 | json }}</pre>
+  </div>
+</section>
+
+<hr class="my-5" />

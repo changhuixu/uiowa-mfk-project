@@ -35,9 +35,6 @@
 }
 
 .favorite-dropdown-menu {
-  top: 0;
-  left: 0;
-  will-change: transform;
-  position: absolute;
+  display: block;
   transform: translate(0, 38px);
 }

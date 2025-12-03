@@ -1,6 +1,6 @@
 <nav class="tab">
-  <a routerLink="demos" routerLinkActive="active">Basic Demos</a>
-  <a routerLink="actions" routerLinkActive="active">Advanced Demos</a>
+  <a routerLink="basic-demos" routerLinkActive="active">Basic Demos</a>
+  <a routerLink="advanced-demos" routerLinkActive="active">Advanced Demos</a>
   <a routerLink="split-cost" routerLinkActive="active">Split Cost</a>
   <a routerLink="favorite-mfk" routerLinkActive="active">Favorite MFK Demos</a>
   <a routerLink="mfk-validations" routerLinkActive="active">MFK Validations</a>
@@ -14,6 +14,8 @@
     GitHub Repo
   </a>
 </nav>
-<div class="container py-2">
-  <router-outlet></router-outlet>
+<div class="flex-fill overflow-auto">
+  <div class="container py-2">
+    <router-outlet></router-outlet>
+  </div>
 </div>

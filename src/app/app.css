@@ -1,5 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .tab {
-  overflow: hidden;
   border: 1px solid #efe3ff;
   background-color: #fcfaff;
 }
