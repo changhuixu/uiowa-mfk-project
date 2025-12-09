@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
-  QueryList,
+  output,
   SimpleChanges,
-  ViewChildren,
+  viewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DigitOnlyDirective } from '@uiowa/digit-only';
@@ -32,24 +30,17 @@ export class MfkInput implements OnInit, OnChanges {
     mfk = Object.assign(emptyMfk(), mfk);
     this.options
       .filter((o) => o.defaultValue)
-      .forEach((o) => {
-        mfk[o.name] = mfk[o.name] || o.defaultValue;
-      });
-    this.options
-      .filter((o) => o.readonly)
-      .forEach((o) => {
-        mfk[o.name] = o.defaultValue;
-      });
+      .forEach((o) => (mfk[o.name] = mfk[o.name] || o.defaultValue));
+    this.options.filter((o) => o.readonly).forEach((o) => (mfk[o.name] = o.defaultValue));
     this._mfk = mfk;
   }
   get mfk(): Mfk {
     return this._mfk;
   }
+  mfkChange = output<Mfk>();
 
   @Input() options: MfkFieldOption[] = [];
-  @Output() mfkChange = new EventEmitter<Mfk>();
-  @ViewChildren(DigitOnlyDirective)
-  mfkInputFields!: QueryList<DigitOnlyDirective>;
+  mfkInputFields = viewChildren(DigitOnlyDirective);
   elementId = 'mfk-container_';
   elementName = 'mfk-container_';
 
@@ -110,7 +101,7 @@ export class MfkInput implements OnInit, OnChanges {
         if (this.options[i].readonly) {
           continue;
         }
-        const nextInputField = this.mfkInputFields.find(
+        const nextInputField = this.mfkInputFields().find(
           (v) => v.el.nativeElement['name'] === this.options[i].name
         );
         nextInputField?.el.nativeElement.focus();
@@ -143,7 +134,7 @@ export class MfkInput implements OnInit, OnChanges {
         if (this.options[i].readonly) {
           continue;
         }
-        const prevInputField = this.mfkInputFields.find(
+        const prevInputField = this.mfkInputFields().find(
           (v) => v.el.nativeElement['name'] === this.options[i].name
         );
         prevInputField?.el.nativeElement.focus();
