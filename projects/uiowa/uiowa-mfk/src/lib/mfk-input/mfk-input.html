@@ -1,5 +1,5 @@
 <form id="{{ elementId }}" name="{{ elementName }}" [attr.name]="elementName" class="mfk-container">
-  @for (op of options; track $index) {
+  @for (op of _options; track $index) {
   <div class="mfk-field">
     <label for="{{ elementId + op.name }}">
       {{ op.label }}

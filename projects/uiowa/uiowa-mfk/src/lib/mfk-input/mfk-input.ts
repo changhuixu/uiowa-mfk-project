@@ -1,10 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
+  input,
   Input,
   OnChanges,
-  OnInit,
   output,
   SimpleChanges,
   viewChildren,
@@ -14,7 +15,7 @@ import { DigitOnlyDirective } from '@uiowa/digit-only';
 import { Mfk } from '../models/mfk';
 import { MfkFieldName } from '../models/mfk-field-name';
 import { MfkFieldOption } from '../models/mfk-field-option';
-import { areEqual, emptyMfk, stringify, toMfk, validFormat } from '../models/mfk-tools';
+import { areEqual, emptyMfk, stringify, toMfk } from '../models/mfk-tools';
 
 @Component({
   selector: 'uiowa-mfk-input',
@@ -23,23 +24,24 @@ import { areEqual, emptyMfk, stringify, toMfk, validFormat } from '../models/mfk
   styleUrl: './mfk-input.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MfkInput implements OnInit, OnChanges {
+export class MfkInput implements OnChanges {
   private _mfk: Mfk = emptyMfk();
   @Input()
   set mfk(mfk: Mfk) {
-    mfk = Object.assign(emptyMfk(), mfk);
-    this.options
+    const m = Object.assign(emptyMfk(), mfk);
+    this._options
       .filter((o) => o.defaultValue)
-      .forEach((o) => (mfk[o.name] = mfk[o.name] || o.defaultValue));
-    this.options.filter((o) => o.readonly).forEach((o) => (mfk[o.name] = o.defaultValue));
-    this._mfk = mfk;
+      .forEach((o) => (m[o.name] = m[o.name] || o.defaultValue));
+    this._options.filter((o) => o.readonly).forEach((o) => (m[o.name] = o.defaultValue));
+    this._mfk = m;
   }
   get mfk(): Mfk {
     return this._mfk;
   }
   mfkChange = output<Mfk>();
 
-  @Input() options: MfkFieldOption[] = [];
+  options = input<MfkFieldOption[]>([]);
+  protected _options: MfkFieldOption[] = [];
   mfkInputFields = viewChildren(DigitOnlyDirective);
   elementId = 'mfk-container_';
   elementName = 'mfk-container_';
@@ -50,6 +52,12 @@ export class MfkInput implements OnInit, OnChanges {
       el.nativeElement.getAttribute('id') || el.nativeElement.getAttribute('name') || rand;
     this.elementName +=
       el.nativeElement.getAttribute('name') || el.nativeElement.getAttribute('id') || rand;
+
+    effect(() => {
+      this._options = this.mergeOptions(this.options());
+      this.mfk = this.mfk;
+      this.mfkChange.emit(this.mfk);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -59,14 +67,7 @@ export class MfkInput implements OnInit, OnChanges {
         this.mfkChange.emit(this.mfk);
       }
     }
-    if (changes['options'] || !this.options.length) {
-      this.options = this.mergeOptions(changes['options']?.currentValue);
-      this.mfk = this.mfk;
-      this.mfkChange.emit(this.mfk);
-    }
   }
-
-  ngOnInit() {}
 
   paste(e: ClipboardEvent) {
     const pastedInput: string = e.clipboardData?.getData('text/plain').replace(/\D/g, '') ?? ''; // get a digit-only string
@@ -75,37 +76,10 @@ export class MfkInput implements OnInit, OnChanges {
     }
     if (pastedInput.length >= 40) {
       const mfk_temp = toMfk(pastedInput);
-      if (validFormat(mfk_temp) && !areEqual(this.mfk, mfk_temp)) {
+      if (!areEqual(this.mfk, mfk_temp)) {
         this.mfk = mfk_temp;
         this.originalMfk = stringify(this.mfk);
         this.mfkChange.emit(this.mfk);
-      }
-    }
-  }
-
-  onKeyup(e: KeyboardEvent) {
-    if (this.originalMfk !== stringify(this.mfk)) {
-      this.mfkChange.emit(this.mfk);
-    }
-
-    if (isNaN(Number(e.key))) {
-      return; // only numbers can trigger auto jump feature.
-    }
-
-    const target = e.target as HTMLInputElement;
-    const fieldName = target.name as keyof Mfk;
-    if (this.mfk[fieldName]?.length === target.maxLength) {
-      // auto jump to the next input field when current field is full
-      const currentInputFieldIndex = this.options.findIndex((o) => o.name === fieldName);
-      for (let i = currentInputFieldIndex + 1; i < this.options.length; i++) {
-        if (this.options[i].readonly) {
-          continue;
-        }
-        const nextInputField = this.mfkInputFields().find(
-          (v) => v.el.nativeElement['name'] === this.options[i].name
-        );
-        nextInputField?.el.nativeElement.focus();
-        break;
       }
     }
   }
@@ -128,16 +102,42 @@ export class MfkInput implements OnInit, OnChanges {
 
     // handle "backspace" key
     if ((e.key === 'Backspace' || e.code === 'Backspace') && this.mfk[fieldName]?.length === 0) {
-      const currentInputFieldIndex = this.options.findIndex((o) => o.name === fieldName);
+      const currentInputFieldIndex = this._options.findIndex((o) => o.name === fieldName);
       // auto jump to the previous input field when current field is empty
       for (let i = currentInputFieldIndex - 1; i >= 0; i--) {
-        if (this.options[i].readonly) {
+        if (this._options[i].readonly) {
           continue;
         }
         const prevInputField = this.mfkInputFields().find(
-          (v) => v.el.nativeElement['name'] === this.options[i].name
+          (v) => v.el.nativeElement['name'] === this._options[i].name
         );
         prevInputField?.el.nativeElement.focus();
+        break;
+      }
+    }
+  }
+  onKeyup(e: KeyboardEvent) {
+    if (this.originalMfk !== stringify(this.mfk)) {
+      this.mfkChange.emit(this.mfk);
+    }
+
+    if (isNaN(Number(e.key))) {
+      return; // only numbers can trigger auto jump feature.
+    }
+
+    const target = e.target as HTMLInputElement;
+    const fieldName = target.name as keyof Mfk;
+    if (this.mfk[fieldName]?.length === target.maxLength) {
+      // auto jump to the next input field when current field is full
+      const currentInputFieldIndex = this._options.findIndex((o) => o.name === fieldName);
+      for (let i = currentInputFieldIndex + 1; i < this._options.length; i++) {
+        if (this._options[i].readonly) {
+          continue;
+        }
+        const nextInputField = this.mfkInputFields().find(
+          (v) => v.el.nativeElement['name'] === this._options[i].name
+        );
+        nextInputField?.el.nativeElement.focus();
         break;
       }
     }

@@ -4,6 +4,8 @@ describe('Advanced Demos', () => {
   });
 
   it('should preserve the readonly field in an MFK input', () => {
+    cy.get('#mfk1-string > uiowa-mfk-string').invoke('text').should('be.equal', '-----xxxx----');
+
     cy.get('button#update-value1-btn').click();
 
     cy.get('#update-mfk-value > uiowa-mfk-input > .mfk-container > :nth-child(6) > input')
